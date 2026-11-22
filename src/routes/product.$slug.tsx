@@ -22,9 +22,10 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LabReportView } from "@/components/site/LabReportDialog";
+import { ProductIngredientsUse } from "@/components/site/ProductIngredientsUse";
 import { Stars } from "@/components/site/Stars";
 import { StockBadge } from "@/components/site/StockBadge";
-import { discount, formatINR, getProduct, PRODUCTS, type Product } from "@/data/products";
+import { discount, formatINR, getProduct, isEdible, PRODUCTS, type Product } from "@/data/products";
 import { matchesProfile } from "@/lib/recommend";
 import { useStore } from "@/lib/store";
 
@@ -291,7 +292,7 @@ function ProductDetailPage() {
               </TabsTrigger>
             )}
             <TabsTrigger value="nutrition" className="py-2 text-xs font-bold uppercase tracking-wider text-stone-700">
-              Ingredients & Use
+              {isEdible(product) ? "🧪 Ingredients & Aminos" : "Materials & Specs"}
             </TabsTrigger>
             <TabsTrigger value="reviews" className="py-2 text-xs font-bold uppercase tracking-wider text-stone-700">
               Reviews ({product.reviewsCount})
@@ -357,51 +358,8 @@ function ProductDetailPage() {
           )}
 
           {/* TAB 3: INGREDIENTS & NUTRITION */}
-          <TabsContent value="nutrition" className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {product.nutrition && (
-                <div className="space-y-2.5">
-                  <h3 className="font-display text-xl font-black uppercase text-stone-900">Nutritional Facts (Per Serving)</h3>
-                  <div className="overflow-x-auto rounded-xl border border-stone-200 bg-[#FAF7F2]">
-                    <table className="w-full text-xs sm:text-sm">
-                      <thead className="bg-stone-50 text-[11px] uppercase text-stone-500 border-b border-stone-200">
-                        <tr>
-                          <th className="p-3 text-left">Nutrient</th>
-                          <th className="p-3 text-right">Value Per Scoop</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-800/80">
-                        {product.nutrition.map((n) => (
-                          <tr key={n.label}>
-                            <td className="p-3 font-medium text-stone-800">{n.label}</td>
-                            <td className="p-3 text-right font-bold text-stone-900 font-mono">{n.value}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
-
-              <div className="space-y-4">
-                {product.ingredients && (
-                  <div>
-                    <h3 className="font-display text-xl font-black uppercase text-stone-900 mb-2">Ingredients List</h3>
-                    <p className="text-xs sm:text-sm text-stone-700 leading-relaxed bg-[#FAF7F2] border border-stone-200 p-4 rounded-xl">
-                      {product.ingredients.join(", ")}.
-                    </p>
-                  </div>
-                )}
-                {product.usage && (
-                  <div className="rounded-xl border border-stone-200 bg-[#FAF7F2] p-4">
-                    <h4 className="font-bold text-xs uppercase tracking-wider text-[#D9622B] mb-1">
-                      Beginner Guide: How & When to Use
-                    </h4>
-                    <p className="text-xs text-stone-700 leading-relaxed">{product.usage}</p>
-                  </div>
-                )}
-              </div>
-            </div>
+          <TabsContent value="nutrition">
+            <ProductIngredientsUse product={product} />
           </TabsContent>
 
           {/* TAB 4: REVIEWS */}
