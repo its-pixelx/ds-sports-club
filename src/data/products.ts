@@ -1,4 +1,5 @@
-import whey from "@/assets/products/whey.jpg";
+import onWhey from "@/assets/products/on-whey.jpg";
+import mbBiozyme from "@/assets/products/mb-biozyme.jpg";
 import plant from "@/assets/products/plant.jpg";
 import gainer from "@/assets/products/gainer.jpg";
 import creatine from "@/assets/products/creatine.jpg";
@@ -162,7 +163,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewsCount: 3840,
     stock: 48,
-    image: whey,
+    image: onWhey,
     goals: ["workout", "bulking", "weightloss", "general"],
     diet: "veg",
     lactose: true,
@@ -228,7 +229,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.7,
     reviewsCount: 2910,
     stock: 35,
-    image: whey,
+    image: mbBiozyme,
     goals: ["workout", "bulking", "general"],
     diet: "veg",
     lactose: true,
