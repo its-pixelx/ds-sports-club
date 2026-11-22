@@ -26,6 +26,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AddToCartButton } from "@/components/site/AddToCartButton";
 import { LabReportView } from "@/components/site/LabReportDialog";
 import { ProductIngredientsUse } from "@/components/site/ProductIngredientsUse";
+import { ScrollableTabsHeader } from "@/components/site/ScrollableTabsHeader";
 import { Stars } from "@/components/site/Stars";
 import { StockBadge } from "@/components/site/StockBadge";
 import { discount, formatINR, getProduct, isEdible, PRODUCTS, type Product } from "@/data/products";
@@ -260,52 +261,8 @@ function ProductDetailPage() {
 
       {/* Tabs Section: Product Specs, Lab Report, Ingredients, Reviews, Returns */}
       <div className="mt-12 border-t border-stone-200 pt-8">
-        <Tabs defaultValue={product.labReport ? "lab" : "overview"} className="w-full">
-          <div className="w-full overflow-x-auto scrollbar-none pb-2 pt-1 -mx-2 px-2 sm:mx-0 sm:px-0">
-            <TabsList
-              className={`flex w-max sm:w-full items-center justify-start sm:grid ${
-                product.labReport ? "sm:grid-cols-5" : "sm:grid-cols-4"
-              } gap-1.5 p-1.5 bg-[#FAF7F2] border border-stone-200/90 rounded-2xl shadow-xs`}
-            >
-              <TabsTrigger
-                value="overview"
-                className="shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:px-2 md:px-3 text-xs sm:text-[11px] lg:text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer whitespace-nowrap min-h-[42px] border border-transparent data-[state=active]:border-[#D9622B] data-[state=active]:bg-[#D9622B] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-white data-[state=inactive]:text-stone-700 data-[state=inactive]:border-stone-200 hover:text-stone-900 hover:border-stone-300"
-              >
-                <FileText className="size-3.5 shrink-0" />
-                <span>Overview</span>
-              </TabsTrigger>
-              {product.labReport && (
-                <TabsTrigger
-                  value="lab"
-                  className="shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:px-2 md:px-3 text-xs sm:text-[11px] lg:text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer whitespace-nowrap min-h-[42px] border border-transparent data-[state=active]:border-[#D9622B] data-[state=active]:bg-[#D9622B] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-white data-[state=inactive]:text-stone-700 data-[state=inactive]:border-stone-200 hover:text-stone-900 hover:border-stone-300"
-                >
-                  <FlaskConical className="size-3.5 shrink-0" />
-                  <span>Lab Report</span>
-                </TabsTrigger>
-              )}
-              <TabsTrigger
-                value="nutrition"
-                className="shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:px-2 md:px-3 text-xs sm:text-[11px] lg:text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer whitespace-nowrap min-h-[42px] border border-transparent data-[state=active]:border-[#D9622B] data-[state=active]:bg-[#D9622B] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-white data-[state=inactive]:text-stone-700 data-[state=inactive]:border-stone-200 hover:text-stone-900 hover:border-stone-300"
-              >
-                <Zap className="size-3.5 shrink-0" />
-                <span>{isEdible(product) ? "Ingredients & Aminos" : "Materials & Specs"}</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="reviews"
-                className="shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:px-2 md:px-3 text-xs sm:text-[11px] lg:text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer whitespace-nowrap min-h-[42px] border border-transparent data-[state=active]:border-[#D9622B] data-[state=active]:bg-[#D9622B] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-white data-[state=inactive]:text-stone-700 data-[state=inactive]:border-stone-200 hover:text-stone-900 hover:border-stone-300"
-              >
-                <Star className="size-3.5 shrink-0" />
-                <span>Reviews ({product.reviewsCount})</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="returns"
-                className="shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:px-2 md:px-3 text-xs sm:text-[11px] lg:text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer whitespace-nowrap min-h-[42px] border border-transparent data-[state=active]:border-[#D9622B] data-[state=active]:bg-[#D9622B] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-white data-[state=inactive]:text-stone-700 data-[state=inactive]:border-stone-200 hover:text-stone-900 hover:border-stone-300"
-              >
-                <RotateCcw className="size-3.5 shrink-0" />
-                <span>10-Day Returns</span>
-              </TabsTrigger>
-            </TabsList>
-          </div>
+        <Tabs defaultValue="overview" className="w-full">
+          <ScrollableTabsHeader product={product} />
 
           {/* TAB 1: OVERVIEW */}
           <TabsContent value="overview" className="space-y-6">

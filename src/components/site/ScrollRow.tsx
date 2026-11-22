@@ -56,8 +56,16 @@ export function ScrollRow({
   const handleScroll = (direction: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
-    const offset = direction === "left" ? -scrollAmount : scrollAmount;
-    el.scrollBy({ left: offset, behavior: "smooth" });
+    // High sensitivity: scroll 85% of visible container or at least 380px end-to-end
+    const distance = Math.max(380, Math.round(el.clientWidth * 0.85));
+    if (direction === "right") {
+      const remaining = el.scrollWidth - (el.scrollLeft + el.clientWidth);
+      const move = remaining < distance * 1.3 ? remaining : distance;
+      el.scrollBy({ left: move, behavior: "smooth" });
+    } else {
+      const move = el.scrollLeft < distance * 1.3 ? el.scrollLeft : distance;
+      el.scrollBy({ left: -move, behavior: "smooth" });
+    }
   };
 
   return (
@@ -67,9 +75,10 @@ export function ScrollRow({
         <button
           type="button"
           onClick={() => handleScroll("left")}
-          disabled={!canScrollLeft}
           aria-label="Scroll left"
-          className={`absolute left-1 top-1/2 -translate-y-1/2 z-20 flex size-8 sm:size-9 items-center justify-center rounded-full bg-white/95 text-stone-800 shadow-[0_2px_8px_rgba(40,30,20,0.12)] border border-stone-200/90 backdrop-blur-md transition-all duration-200 hover:bg-stone-50 hover:text-stone-950 hover:scale-105 active:scale-95 disabled:opacity-30 disabled:pointer-events-none cursor-pointer ${arrowClassName}`}
+          className={`absolute left-1 top-1/2 -translate-y-1/2 z-20 flex size-8 sm:size-9 items-center justify-center rounded-full bg-white/95 text-stone-800 shadow-[0_2px_8px_rgba(40,30,20,0.12)] border border-stone-200/90 backdrop-blur-md transition-all duration-200 hover:bg-[#D9622B] hover:text-white hover:border-[#D9622B] hover:scale-105 active:scale-95 cursor-pointer ${
+            canScrollLeft ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-75 pointer-events-none"
+          } ${arrowClassName}`}
         >
           <ChevronLeft className="size-4 sm:size-4.5" />
         </button>
@@ -111,9 +120,10 @@ export function ScrollRow({
         <button
           type="button"
           onClick={() => handleScroll("right")}
-          disabled={!canScrollRight}
           aria-label="Scroll right"
-          className={`absolute right-1 top-1/2 -translate-y-1/2 z-20 flex size-8 sm:size-9 items-center justify-center rounded-full bg-white/95 text-stone-800 shadow-[0_2px_8px_rgba(40,30,20,0.12)] border border-stone-200/90 backdrop-blur-md transition-all duration-200 hover:bg-stone-50 hover:text-stone-950 hover:scale-105 active:scale-95 disabled:opacity-30 disabled:pointer-events-none cursor-pointer ${arrowClassName}`}
+          className={`absolute right-1 top-1/2 -translate-y-1/2 z-20 flex size-8 sm:size-9 items-center justify-center rounded-full bg-white/95 text-stone-800 shadow-[0_2px_8px_rgba(40,30,20,0.12)] border border-stone-200/90 backdrop-blur-md transition-all duration-200 hover:bg-[#D9622B] hover:text-white hover:border-[#D9622B] hover:scale-105 active:scale-95 cursor-pointer ${
+            canScrollRight ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-75 pointer-events-none"
+          } ${arrowClassName}`}
         >
           <ChevronRight className="size-4 sm:size-4.5" />
         </button>
