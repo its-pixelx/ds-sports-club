@@ -119,7 +119,7 @@ function ProductDetailPage() {
               )}
             </div>
 
-            <span className="absolute right-3 top-3 rounded-full bg-stone-900/90 border border-stone-200 px-2.5 py-1 text-xs font-black text-stone-900 shadow">
+            <span className="absolute right-3 top-3 rounded-full bg-stone-900/90 border border-stone-700 px-2.5 py-1 text-xs font-black text-white shadow">
               -{discount(product)}% OFF
             </span>
           </div>

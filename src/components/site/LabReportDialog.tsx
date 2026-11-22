@@ -49,28 +49,28 @@ export function LabReportView({ report, productName }: { report: LabReport; prod
   return (
     <div className="space-y-6 text-stone-800">
       {/* Official Certificate Header Banner */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-[#D9622B]/30 bg-[#D9622B]/10 p-5 text-stone-900">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-[#D9622B]/30 bg-[#D9622B]/10 p-4 sm:p-5 text-stone-900">
         <div className="flex items-center gap-3.5">
-          <div className="grid size-12 place-items-center rounded-2xl bg-[#D9622B] text-white shrink-0">
-            <ShieldCheck className="size-7" />
+          <div className="grid size-11 sm:size-12 place-items-center rounded-2xl bg-[#D9622B] text-white shrink-0">
+            <ShieldCheck className="size-6 sm:size-7" />
           </div>
           <div>
-            <p className="font-display text-2xl font-black uppercase tracking-tight">
+            <p className="font-display text-xl sm:text-2xl font-black uppercase tracking-tight">
               Certificate of Analysis (CoA)
             </p>
-            <p className="text-xs text-sky-200/80 mt-0.5 font-mono">
+            <p className="text-xs text-stone-600 mt-0.5 font-mono">
               Certificate No: {report.certificateNo} · {report.fssaiLicense}
             </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="rounded-full bg-emerald-500 px-3 py-1 text-xs font-black uppercase text-white">
+          <span className="rounded-full bg-emerald-600 px-3 py-1 text-xs font-black uppercase text-white shadow-sm">
             ALL TESTS PASSED
           </span>
           <button
             type="button"
             onClick={handlePrintDownload}
-            className="rounded-xl border border-[#D9622B]/30 bg-stone-50 px-3 py-1.5 text-xs font-semibold text-stone-900 hover:bg-[#D9622B] hover:text-white transition-colors flex items-center gap-1.5"
+            className="rounded-xl border border-stone-300 bg-white px-3 py-1.5 text-xs font-semibold text-stone-900 hover:bg-[#D9622B] hover:text-white transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer"
             title="Download / Print Certificate"
           >
             <Download className="size-3.5" /> Download
@@ -145,7 +145,7 @@ export function LabReportDialog({
           </button>
         )}
       </DialogTrigger>
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl bg-[#FAF7F2] border-stone-200 text-stone-900 p-6">
+      <DialogContent className="max-h-[90vh] overflow-y-auto overflow-x-hidden w-[calc(100vw-1.5rem)] sm:w-full sm:max-w-3xl bg-white border border-stone-200 text-stone-900 p-4 sm:p-6 rounded-2xl shadow-2xl">
         <DialogHeader>
           <DialogTitle className="font-display text-3xl uppercase font-black text-stone-900">
             Official Laboratory Report

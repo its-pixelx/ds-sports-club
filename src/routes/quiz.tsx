@@ -185,7 +185,7 @@ export function QuizPage() {
                 <p className="text-xs font-bold uppercase tracking-widest text-[#D9622B]">
                   D&S Sports Club Personalization
                 </p>
-                <h1 className="mt-2 font-display text-3xl sm:text-5xl font-black uppercase text-stone-900 tracking-tight">
+                <h1 className="mt-2 font-display text-2xl sm:text-4xl md:text-5xl font-black uppercase text-stone-900 tracking-tight">
                   What is your name?
                 </h1>
                 <p className="mt-2 text-xs sm:text-sm text-stone-500 max-w-md mx-auto leading-relaxed">
@@ -201,7 +201,7 @@ export function QuizPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleNext()}
-                  className="w-full rounded-2xl border border-stone-300 bg-white px-5 py-3.5 text-center text-lg sm:text-xl font-bold text-stone-900 placeholder:text-stone-400 focus:border-[#D9622B] focus:outline-none focus:ring-2 focus:ring-[#D9622B]/25 transition-all"
+                  className="w-full rounded-2xl border border-stone-300 bg-white px-4 py-3 sm:py-3.5 text-center text-base sm:text-xl font-bold text-stone-900 placeholder:text-stone-400 focus:border-[#D9622B] focus:outline-none focus:ring-2 focus:ring-[#D9622B]/25 transition-all shadow-sm"
                 />
               </div>
             </motion.div>
@@ -549,14 +549,14 @@ export function QuizPage() {
                   <label className="text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2 block">
                     Sensitivities (Click to filter)
                   </label>
-                  <div className="grid grid-cols-2 gap-2.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <button
                       type="button"
                       onClick={() => toggleAllergy("lactose")}
                       className={`p-3.5 rounded-xl border text-left text-xs transition-all cursor-pointer ${
                         allergies.includes("lactose")
-                          ? "border-amber-400 bg-amber-400/10 text-amber-200 ring-1 ring-amber-400"
-                          : "border-stone-200 bg-white text-stone-500 hover:bg-stone-100"
+                          ? "border-[#D9622B] bg-[#D9622B]/10 text-stone-900 ring-1 ring-[#D9622B]"
+                          : "border-stone-200 bg-white text-stone-600 hover:bg-stone-50"
                       }`}
                     >
                       <p className="text-stone-900 font-bold">🥛 Lactose Sensitive</p>
@@ -567,8 +567,8 @@ export function QuizPage() {
                       onClick={() => toggleAllergy("gluten")}
                       className={`p-3.5 rounded-xl border text-left text-xs transition-all cursor-pointer ${
                         allergies.includes("gluten")
-                          ? "border-amber-400 bg-amber-400/10 text-amber-200 ring-1 ring-amber-400"
-                          : "border-stone-200 bg-white text-stone-500 hover:bg-stone-100"
+                          ? "border-[#D9622B] bg-[#D9622B]/10 text-stone-900 ring-1 ring-[#D9622B]"
+                          : "border-stone-200 bg-white text-stone-600 hover:bg-stone-50"
                       }`}
                     >
                       <p className="text-stone-900 font-bold">🌾 Gluten Sensitive</p>
@@ -716,11 +716,11 @@ export function QuizPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#090d14]/98 backdrop-blur-md px-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#FAF7F2]/90 backdrop-blur-md px-4"
           >
-            <div className="max-w-md w-full text-center space-y-6">
+            <div className="max-w-md w-full rounded-3xl border border-stone-200/90 bg-white p-6 sm:p-8 text-center space-y-6 shadow-2xl">
               <div className="relative mx-auto size-20">
-                <div className="absolute inset-0 rounded-full border-4 border-stone-200" />
+                <div className="absolute inset-0 rounded-full border-4 border-stone-100" />
                 <motion.div
                   className="absolute inset-0 rounded-full border-4 border-[#D9622B] border-t-transparent animate-spin"
                   style={{ animationDuration: "0.9s" }}
@@ -734,20 +734,20 @@ export function QuizPage() {
                 <h3 className="font-display text-2xl sm:text-3xl font-black uppercase text-stone-900 tracking-wide">
                   Building Your Starter Kit
                 </h3>
-                <p className="mt-2 text-xs sm:text-sm text-stone-700 h-6 transition-all">{analysisText}</p>
+                <p className="mt-2 text-xs sm:text-sm text-stone-600 min-h-6 transition-all">{analysisText}</p>
               </div>
 
               <div className="space-y-2">
-                <div className="h-1.5 w-full overflow-hidden rounded-full bg-stone-200">
+                <div className="h-2 w-full overflow-hidden rounded-full bg-stone-100">
                   <motion.div
                     className="h-full bg-[#D9622B]"
                     animate={{ width: `${analysisProgress}%` }}
                     transition={{ duration: 0.4 }}
                   />
                 </div>
-                <div className="flex justify-between text-[11px] text-slate-500 font-mono">
-                  <span>AUDITING BATCHES</span>
-                  <span>{analysisProgress}%</span>
+                <div className="flex justify-between text-[11px] text-stone-400 font-mono">
+                  <span>AUDITING BATCHES &amp; COAS</span>
+                  <span className="font-bold text-[#D9622B]">{analysisProgress}%</span>
                 </div>
               </div>
             </div>
@@ -757,20 +757,20 @@ export function QuizPage() {
 
       {/* STEP 11: Tailored Starter Kit Results Pop-Up Modal */}
       <Dialog open={showModal} onOpenChange={setShowModal}>
-        <DialogContent className="max-h-[92vh] overflow-y-auto sm:max-w-3xl bg-[#090d14] border-stone-200 text-stone-900 p-5 sm:p-6">
+        <DialogContent className="max-h-[88vh] overflow-y-auto overflow-x-hidden w-[calc(100vw-1.5rem)] sm:w-full sm:max-w-2xl bg-white border border-stone-200 text-stone-900 p-4 sm:p-6 rounded-2xl shadow-2xl">
           <DialogHeader className="text-left space-y-2 border-b border-stone-200 pb-4">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#D9622B]/15 border border-[#D9622B]/30 px-3 py-1 text-xs font-bold text-[#D9622B]">
+            <div className="flex flex-wrap items-center justify-between gap-2 pr-6">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#D9622B]/10 border border-[#D9622B]/30 px-3 py-1 text-xs font-bold text-[#D9622B]">
                 <Sparkles className="size-3.5" /> 100% Tailored Recommendation
               </span>
-              <span className="text-xs text-stone-500">
+              <span className="text-xs font-bold text-stone-500">
                 Budget: {formatINR(budget)} limit
               </span>
             </div>
-            <DialogTitle className="font-display text-2xl sm:text-3xl font-black uppercase text-stone-900">
+            <DialogTitle className="font-display text-xl sm:text-3xl font-black uppercase text-stone-900 break-words leading-tight mt-1">
               Here is Your Starter Kit, {name}!
             </DialogTitle>
-            <DialogDescription className="text-stone-700 text-xs sm:text-sm leading-relaxed">
+            <DialogDescription className="text-stone-600 text-xs sm:text-sm leading-relaxed">
               Matched for your <strong className="text-stone-900 uppercase">{goal}</strong> focus,{" "}
               <strong className="text-stone-900">{level}</strong> level, and{" "}
               <strong className="text-stone-900">{diet}</strong> diet. Every edible supplement includes verified NABL lab reports.
@@ -785,32 +785,32 @@ export function QuizPage() {
                 return (
                   <div
                     key={p.slug}
-                    className="flex flex-col rounded-2xl border border-stone-200 bg-white p-4 transition-all hover:border-stone-300 space-y-3"
+                    className="flex flex-col rounded-2xl border border-stone-200 bg-[#FAF7F2] p-3.5 sm:p-4 transition-all hover:border-stone-300 space-y-3"
                   >
                     <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-stone-100">
                       <img src={p.image} alt={p.name} className="size-full object-cover" />
                       {p.labReport && (
-                        <span className="absolute top-2 left-2 rounded-full bg-stone-900/90 border border-stone-300 px-2 py-0.5 text-[10px] font-bold text-[#D9622B] flex items-center gap-1">
+                        <span className="absolute top-2 left-2 rounded-full bg-stone-900/90 border border-stone-300 px-2 py-0.5 text-[10px] font-bold text-[#D9622B] flex items-center gap-1 shadow">
                           <FlaskConical className="size-3" /> Lab Tested
                         </span>
                       )}
-                      <span className="absolute top-2 right-2 rounded-full bg-[#D9622B] px-2 py-0.5 text-[10px] font-black text-white">
+                      <span className="absolute top-2 right-2 rounded-full bg-[#D9622B] px-2 py-0.5 text-[10px] font-black text-white shadow">
                         {Math.min(99, Math.round(85 + rec.score * 2))}% Match
                       </span>
                     </div>
 
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-stone-500">{p.brand}</p>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#D9622B]">{p.brand}</p>
                       <p className="font-bold text-stone-900 text-sm line-clamp-1">{p.name}</p>
-                      <p className="text-xs text-stone-500 line-clamp-2 mt-0.5">{p.short}</p>
+                      <p className="text-xs text-stone-500 line-clamp-2 mt-0.5 leading-relaxed">{p.short}</p>
                     </div>
 
                     {/* Reasons tags */}
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-1">
                       {rec.reasons.map((r) => (
                         <span
                           key={r}
-                          className="rounded-full bg-stone-100 border border-stone-200 px-2 py-0.5 text-[10px] font-semibold text-stone-700"
+                          className="rounded-full bg-white border border-stone-200 px-2 py-0.5 text-[10px] font-semibold text-stone-700"
                         >
                           ✓ {r}
                         </span>
@@ -818,15 +818,15 @@ export function QuizPage() {
                     </div>
 
                     {/* Price & Actions */}
-                    <div className="mt-auto pt-3 flex items-center justify-between border-t border-stone-200">
+                    <div className="mt-auto pt-3 flex flex-wrap items-center justify-between gap-2 border-t border-stone-200/80">
                       <div>
                         <span className="text-base font-black text-stone-900">{formatINR(p.price)}</span>
-                        <span className="text-xs text-slate-500 line-through ml-1.5">{formatINR(p.mrp)}</span>
+                        <span className="text-xs text-stone-400 line-through ml-1.5">{formatINR(p.mrp)}</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5">
                         {p.labReport && (
                           <LabReportDialog report={p.labReport} productName={p.name}>
-                            <button className="text-xs font-semibold text-[#D9622B] hover:text-[#C4531E] underline flex items-center gap-1">
+                            <button className="text-xs font-bold text-[#D9622B] hover:text-[#C4531E] underline flex items-center gap-1 cursor-pointer">
                               <FlaskConical className="size-3" /> Report
                             </button>
                           </LabReportDialog>
@@ -837,7 +837,7 @@ export function QuizPage() {
                             add(p.slug, p.options?.values[0]);
                             toast.success(`Added ${p.name} to cart!`);
                           }}
-                          className="bg-[#D9622B] hover:bg-[#C4531E] text-white font-bold text-xs"
+                          className="bg-[#D9622B] hover:bg-[#C4531E] text-white font-bold text-xs h-8 px-3 rounded-lg"
                         >
                           <ShoppingBag className="size-3 mr-1" /> Add
                         </Button>
@@ -860,22 +860,22 @@ export function QuizPage() {
                 setShowModal(false);
                 setStep(1);
               }}
-              className="text-xs text-stone-500 hover:text-stone-900 flex items-center gap-1"
+              className="text-xs font-medium text-stone-500 hover:text-stone-900 flex items-center gap-1 cursor-pointer"
             >
               <RotateCcw className="size-3.5" /> Retake Questionnaire
             </button>
 
-            <div className="flex items-center gap-2 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
               <Button
                 variant="outline"
                 onClick={finishAndGoToShop}
-                className="w-full sm:w-auto border-stone-300 bg-stone-100 text-stone-800 hover:bg-stone-200 text-xs"
+                className="w-full sm:w-auto border-stone-300 bg-stone-100 text-stone-800 hover:bg-stone-200 text-xs h-9 rounded-xl"
               >
                 Skip & View Full Store
               </Button>
               <Button
                 onClick={finishAndGoToShop}
-                className="w-full sm:w-auto bg-[#D9622B] hover:bg-[#C4531E] text-white font-bold text-xs"
+                className="w-full sm:w-auto bg-[#D9622B] hover:bg-[#C4531E] text-white font-bold text-xs h-9 rounded-xl shadow-md shadow-[#D9622B]/20"
               >
                 Go to Store with My Kit <ArrowRight className="size-3.5 ml-1" />
               </Button>

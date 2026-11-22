@@ -161,14 +161,14 @@ export function CertificatesPage() {
                     <span className="text-[10px] font-bold uppercase tracking-wider text-stone-500">
                       {product.brand}
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 text-[10px] font-bold text-emerald-400">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
                       <CheckCircle2 className="size-3" /> PASS
                     </span>
                   </div>
                   <Link
                     to="/product/$slug"
                     params={{ slug: product.slug }}
-                    className="font-bold text-stone-900 text-sm hover:text-sky-300 transition-colors truncate block"
+                    className="font-bold text-stone-900 text-sm hover:text-[#D9622B] transition-colors truncate block"
                   >
                     {product.name}
                   </Link>
@@ -190,7 +190,7 @@ export function CertificatesPage() {
                 </div>
                 <div>
                   <p className="text-[10px] text-stone-500 uppercase font-semibold">Accreditation</p>
-                  <p className="font-bold text-emerald-400 mt-0.5 truncate">
+                  <p className="font-bold text-emerald-700 mt-0.5 truncate">
                     NABL ISO 17025
                   </p>
                 </div>
@@ -202,7 +202,7 @@ export function CertificatesPage() {
                   <div key={c.parameter} className="flex justify-between border-b border-stone-200/80 pb-1">
                     <span className="text-stone-500">{c.parameter}</span>
                     <span className="font-bold text-stone-900 font-mono">
-                      {c.found} <span className="text-emerald-400 text-[10px]">(Claim: {c.claimed})</span>
+                      {c.found} <span className="text-emerald-700 text-[10px] font-semibold">(Claim: {c.claimed})</span>
                     </span>
                   </div>
                 ))}
@@ -211,11 +211,11 @@ export function CertificatesPage() {
               {/* Action Buttons */}
               <div className="flex items-center justify-between pt-2 border-t border-stone-200">
                 <span className="text-[11px] text-stone-500 flex items-center gap-1">
-                  <BadgeCheck className="size-3.5 text-emerald-400" /> FSSAI Compliant
+                  <BadgeCheck className="size-3.5 text-emerald-600" /> FSSAI Compliant
                 </span>
 
                 <LabReportDialog report={report} productName={product.name}>
-                  <Button size="sm" className="bg-[#D9622B] hover:bg-sky-300 text-white font-bold text-xs h-8">
+                  <Button size="sm" className="bg-[#D9622B] hover:bg-[#C4531E] text-white font-bold text-xs h-8">
                     <FileText className="size-3.5 mr-1" /> View Full Certificate
                   </Button>
                 </LabReportDialog>

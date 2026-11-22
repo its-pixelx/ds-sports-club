@@ -138,13 +138,13 @@ function ReturnsPage() {
                     }}
                     className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
                       selectedOrder.id === ord.id
-                        ? "border-[#D9622B] bg-[#D9622B]/10 text-stone-900 shadow-md ring-1 ring-sky-400"
+                        ? "border-[#D9622B] bg-[#D9622B]/10 text-stone-900 shadow-md ring-1 ring-[#D9622B]"
                         : "border-stone-200 bg-[#FAF7F2] hover:border-stone-300"
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-bold font-mono text-xs sm:text-sm text-stone-900">Order #{ord.id}</span>
-                      <span className="text-[10px] font-semibold text-emerald-400">{ord.status}</span>
+                      <span className="text-[10px] font-semibold text-emerald-700">{ord.status}</span>
                     </div>
                     <p className="text-[11px] text-stone-500 mt-1">{ord.date}</p>
                     <p className="text-[11px] text-stone-700 font-medium mt-1">
@@ -168,7 +168,7 @@ function ReturnsPage() {
                     onClick={() => setSelectedItemIndex(idx)}
                     className={`w-full flex items-center justify-between p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                       selectedItemIndex === idx
-                        ? "border-[#D9622B] bg-[#D9622B]/10 text-stone-900 ring-1 ring-sky-400"
+                        ? "border-[#D9622B] bg-[#D9622B]/10 text-stone-900 ring-1 ring-[#D9622B]"
                         : "border-stone-200 bg-[#FAF7F2] hover:bg-stone-50"
                     }`}
                   >
@@ -195,7 +195,7 @@ function ReturnsPage() {
                     onClick={() => setReason(r)}
                     className={`p-3 rounded-xl border text-left text-xs font-medium transition-all cursor-pointer ${
                       reason === r
-                        ? "border-[#D9622B] bg-[#D9622B]/15 text-stone-900 font-bold ring-1 ring-sky-400"
+                        ? "border-[#D9622B] bg-[#D9622B]/15 text-stone-900 font-bold ring-1 ring-[#D9622B]"
                         : "border-stone-200 bg-[#FAF7F2] text-stone-700 hover:bg-stone-50"
                     }`}
                   >
@@ -237,7 +237,7 @@ function ReturnsPage() {
                     onClick={() => setResolution("replace")}
                     className={`w-full p-3 rounded-xl border text-left text-xs transition-all cursor-pointer ${
                       resolution === "replace"
-                        ? "border-[#D9622B] bg-[#D9622B]/10 font-bold text-stone-900 ring-1 ring-sky-400"
+                        ? "border-[#D9622B] bg-[#D9622B]/10 font-bold text-stone-900 ring-1 ring-[#D9622B]"
                         : "border-stone-200 bg-[#FAF7F2] text-stone-500"
                     }`}
                   >
@@ -284,11 +284,11 @@ function ReturnsPage() {
             className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-6 space-y-5"
           >
             <div className="flex items-center gap-3">
-              <div className="grid size-11 place-items-center rounded-2xl bg-emerald-500/20 text-emerald-400">
+              <div className="grid size-11 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 border border-emerald-200">
                 <CheckCircle2 className="size-6" />
               </div>
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-400">Return Authorized</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700">Return Authorized</span>
                 <h3 className="font-display text-2xl font-black uppercase text-stone-900">
                   Pickup Scheduled for Tomorrow
                 </h3>
@@ -306,7 +306,7 @@ function ReturnsPage() {
               </div>
               <div>
                 <p className="text-stone-500 uppercase font-semibold text-[10px]">Resolution</p>
-                <p className="font-bold text-emerald-400 mt-0.5 capitalize">
+                <p className="font-bold text-emerald-700 mt-0.5 capitalize">
                   {resolution === "refund" ? "Direct Bank / UPI Refund" : "Replacement Order"}
                 </p>
               </div>
