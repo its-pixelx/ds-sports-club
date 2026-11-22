@@ -1,4 +1,4 @@
-name: Deploy D&S Sports Club to GitHub Pages
+name: Deploy D&S Sports Club (Firebase Hosting & GitHub Pages)
 
 on:
   push:
@@ -12,11 +12,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: 'deployments'
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,23 +31,38 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build site with GitHub Pages base path
+      # 1. Build for Firebase Hosting (Base path is root /)
+      - name: Build site for Firebase Hosting
+        run: npm run build
+
+      # 2. Deploy to Firebase Hosting
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DS_SPORTSCLUB }}'
+          channelId: live
+          projectId: ds-sportsclub
+
+      # 3. Rebuild for GitHub Pages (Base path is /ds-sports-club/)
+      - name: Build site for GitHub Pages
         env:
           GITHUB_PAGES: 'true'
           BASE_PATH: '/ds-sports-club/'
         run: npm run build
 
+      # 4. Upload Pages artifact
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: .output/public
 
-  deploy:
+  deploy-gh-pages:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-and-deploy
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
