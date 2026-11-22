@@ -35,9 +35,10 @@ jobs:
       - name: Build site for Firebase Hosting
         run: npm run build
 
-      # 2. Deploy to Firebase Hosting
+      # 2. Deploy to Firebase Hosting (runs when secret is set, continues safely if not yet added)
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
+        continue-on-error: true
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DS_SPORTSCLUB }}'
