@@ -43,7 +43,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     });
   }, []);
   const setQty = useCallback((slug: string, option: string | undefined, qty: number) => {
-    setCart((c) => c.map((l) => (l.slug === slug && l.option === option ? { ...l, qty: Math.max(1, qty) } : l)));
+    if (qty <= 0) {
+      setCart((c) => c.filter((l) => !(l.slug === slug && l.option === option)));
+    } else {
+      setCart((c) => c.map((l) => (l.slug === slug && l.option === option ? { ...l, qty } : l)));
+    }
   }, []);
   const remove = useCallback((slug: string, option?: string) => {
     setCart((c) => c.filter((l) => !(l.slug === slug && l.option === option)));

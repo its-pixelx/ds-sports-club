@@ -163,33 +163,33 @@ export function ProductIngredientsUse({ product }: ProductIngredientsUseProps) {
           </div>
 
           {/* Quick Stats Badges */}
-          <div className="grid grid-cols-2 sm:flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {profile?.totalBcaa && (
-              <div className="rounded-xl border border-amber-200 bg-amber-50/60 p-2.5 text-center min-w-[95px]">
+              <div className="flex-1 sm:flex-initial rounded-xl border border-amber-200 bg-amber-50/70 p-2 sm:p-2.5 text-center min-w-[90px]">
                 <span className="block text-[10px] font-bold uppercase tracking-wider text-amber-800">
                   Total BCAAs
                 </span>
-                <span className="font-mono text-sm sm:text-base font-black text-amber-950">
+                <span className="font-mono text-xs sm:text-base font-black text-amber-950">
                   {profile.totalBcaa}
                 </span>
               </div>
             )}
             {profile?.totalEaa && (
-              <div className="rounded-xl border border-blue-200 bg-blue-50/60 p-2.5 text-center min-w-[95px]">
+              <div className="flex-1 sm:flex-initial rounded-xl border border-blue-200 bg-blue-50/70 p-2 sm:p-2.5 text-center min-w-[90px]">
                 <span className="block text-[10px] font-bold uppercase tracking-wider text-blue-800">
                   Total EAAs
                 </span>
-                <span className="font-mono text-sm sm:text-base font-black text-blue-950">
+                <span className="font-mono text-xs sm:text-base font-black text-blue-950">
                   {profile.totalEaa}
                 </span>
               </div>
             )}
             {product.nutrition?.find((n) => n.label.toLowerCase().includes("protein")) && (
-              <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-2.5 text-center min-w-[95px]">
+              <div className="flex-1 sm:flex-initial rounded-xl border border-emerald-200 bg-emerald-50/70 p-2 sm:p-2.5 text-center min-w-[90px]">
                 <span className="block text-[10px] font-bold uppercase tracking-wider text-emerald-800">
                   Protein
                 </span>
-                <span className="font-mono text-sm sm:text-base font-black text-emerald-950">
+                <span className="font-mono text-xs sm:text-base font-black text-emerald-950">
                   {product.nutrition.find((n) => n.label.toLowerCase().includes("protein"))?.value}
                 </span>
               </div>
@@ -198,15 +198,15 @@ export function ProductIngredientsUse({ product }: ProductIngredientsUseProps) {
         </div>
 
         {/* Sub-Navigation Buttons (Pills) */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none -mx-2 px-2 sm:mx-0 sm:px-0">
           {profile && (
             <button
               type="button"
               onClick={() => setActiveSubTab("amino")}
-              className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 border ${
+              className={`shrink-0 rounded-xl px-4 py-2.5 text-xs font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 border min-h-[40px] ${
                 activeSubTab === "amino"
                   ? "border-[#D9622B] bg-[#D9622B] text-white shadow-sm"
-                  : "border-stone-200 bg-[#FAF7F2] text-stone-700 hover:bg-stone-100"
+                  : "border-stone-200 bg-white text-stone-700 hover:bg-stone-100 hover:border-stone-300"
               }`}
             >
               <Zap className="size-3.5" /> Amino Acid Spectrum ({profile.acids.length})
@@ -216,10 +216,10 @@ export function ProductIngredientsUse({ product }: ProductIngredientsUseProps) {
           <button
             type="button"
             onClick={() => setActiveSubTab("ingredients")}
-            className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 border ${
+            className={`shrink-0 rounded-xl px-4 py-2.5 text-xs font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 border min-h-[40px] ${
               activeSubTab === "ingredients"
                 ? "border-[#D9622B] bg-[#D9622B] text-white shadow-sm"
-                : "border-stone-200 bg-[#FAF7F2] text-stone-700 hover:bg-stone-100"
+                : "border-stone-200 bg-white text-stone-700 hover:bg-stone-100 hover:border-stone-300"
             }`}
           >
             <FlaskConical className="size-3.5" /> Detailed Ingredients
@@ -229,10 +229,10 @@ export function ProductIngredientsUse({ product }: ProductIngredientsUseProps) {
             <button
               type="button"
               onClick={() => setActiveSubTab("nutrition")}
-              className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 border ${
+              className={`shrink-0 rounded-xl px-4 py-2.5 text-xs font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 border min-h-[40px] ${
                 activeSubTab === "nutrition"
                   ? "border-[#D9622B] bg-[#D9622B] text-white shadow-sm"
-                  : "border-stone-200 bg-[#FAF7F2] text-stone-700 hover:bg-stone-100"
+                  : "border-stone-200 bg-white text-stone-700 hover:bg-stone-100 hover:border-stone-300"
               }`}
             >
               <Scale className="size-3.5" /> Supplement Facts ({product.nutrition.length})
@@ -243,10 +243,10 @@ export function ProductIngredientsUse({ product }: ProductIngredientsUseProps) {
             <button
               type="button"
               onClick={() => setActiveSubTab("usage")}
-              className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 border ${
+              className={`shrink-0 rounded-xl px-4 py-2.5 text-xs font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 border min-h-[40px] ${
                 activeSubTab === "usage"
                   ? "border-[#D9622B] bg-[#D9622B] text-white shadow-sm"
-                  : "border-stone-200 bg-[#FAF7F2] text-stone-700 hover:bg-stone-100"
+                  : "border-stone-200 bg-white text-stone-700 hover:bg-stone-100 hover:border-stone-300"
               }`}
             >
               <Clock className="size-3.5" /> How & When to Use
@@ -265,13 +265,13 @@ export function ProductIngredientsUse({ product }: ProductIngredientsUseProps) {
                 <Filter className="size-3.5 text-[#D9622B]" /> Filter Amino Acids:
               </span>
             </div>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2">
               <button
                 type="button"
                 onClick={() => setAminoFilter("ALL")}
-                className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-colors cursor-pointer border ${
+                className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer border ${
                   aminoFilter === "ALL"
-                    ? "bg-stone-900 text-white border-stone-900"
+                    ? "bg-stone-900 text-white border-stone-900 shadow-sm"
                     : "bg-[#FAF7F2] text-stone-600 border-stone-200 hover:bg-stone-100"
                 }`}
               >
@@ -281,9 +281,9 @@ export function ProductIngredientsUse({ product }: ProductIngredientsUseProps) {
                 <button
                   type="button"
                   onClick={() => setAminoFilter("BCAA")}
-                  className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-colors cursor-pointer border ${
+                  className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer border ${
                     aminoFilter === "BCAA"
-                      ? "bg-[#D9622B] text-white border-[#D9622B]"
+                      ? "bg-[#D9622B] text-white border-[#D9622B] shadow-sm"
                       : "bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100"
                   }`}
                 >
@@ -294,9 +294,9 @@ export function ProductIngredientsUse({ product }: ProductIngredientsUseProps) {
                 <button
                   type="button"
                   onClick={() => setAminoFilter("EAA")}
-                  className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-colors cursor-pointer border ${
+                  className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer border ${
                     aminoFilter === "EAA"
-                      ? "bg-blue-600 text-white border-blue-600"
+                      ? "bg-blue-600 text-white border-blue-600 shadow-sm"
                       : "bg-blue-50 text-blue-900 border-blue-200 hover:bg-blue-100"
                   }`}
                 >
@@ -307,9 +307,9 @@ export function ProductIngredientsUse({ product }: ProductIngredientsUseProps) {
                 <button
                   type="button"
                   onClick={() => setAminoFilter("NEAA")}
-                  className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-colors cursor-pointer border ${
+                  className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer border ${
                     aminoFilter === "NEAA"
-                      ? "bg-emerald-600 text-white border-emerald-600"
+                      ? "bg-emerald-600 text-white border-emerald-600 shadow-sm"
                       : "bg-emerald-50 text-emerald-900 border-emerald-200 hover:bg-emerald-100"
                   }`}
                 >

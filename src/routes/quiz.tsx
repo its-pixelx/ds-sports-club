@@ -21,6 +21,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { AddToCartButton } from "@/components/site/AddToCartButton";
 import { LabReportDialog } from "@/components/site/LabReportDialog";
 import { formatINR, PRODUCTS, type Goal, type Product } from "@/data/products";
 import { recommend, type Need, type Profile, type Recommendation } from "@/lib/recommend";
@@ -831,16 +832,7 @@ export function QuizPage() {
                             </button>
                           </LabReportDialog>
                         )}
-                        <Button
-                          size="sm"
-                          onClick={() => {
-                            add(p.slug, p.options?.values[0]);
-                            toast.success(`Added ${p.name} to cart!`);
-                          }}
-                          className="bg-[#D9622B] hover:bg-[#C4531E] text-white font-bold text-xs h-8 px-3 rounded-lg"
-                        >
-                          <ShoppingBag className="size-3 mr-1" /> Add
-                        </Button>
+                        <AddToCartButton product={p} size="md" />
                       </div>
                     </div>
                   </div>

@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { discount, formatINR, type Product } from "@/data/products";
 import { useStore } from "@/lib/store";
 import { matchesProfile } from "@/lib/recommend";
+import { AddToCartButton } from "./AddToCartButton";
 import { Stars } from "./Stars";
 import { StockBadge } from "./StockBadge";
 
@@ -83,19 +84,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             <StockBadge stock={product.stock} />
           </div>
 
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.08 }}
-            disabled={product.stock <= 0}
-            onClick={() => {
-              add(product.slug, product.options?.values[0]);
-              toast.success("Added to cart", { description: product.name });
-            }}
-            aria-label={`Add ${product.name} to cart`}
-            className="grid size-8 sm:size-9 place-items-center rounded-xl bg-stone-100 border border-stone-200 text-stone-800 transition-all hover:bg-[#D9622B] hover:text-white hover:border-[#D9622B] disabled:opacity-30 cursor-pointer shadow-sm"
-          >
-            <Plus className="size-4" />
-          </motion.button>
+          <AddToCartButton product={product} size="sm" />
         </div>
       </div>
     </motion.article>

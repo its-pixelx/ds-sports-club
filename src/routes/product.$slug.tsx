@@ -15,12 +15,15 @@ import {
   ShieldCheck,
   ShoppingBag,
   Sparkles,
+  Star,
   Truck,
+  Zap,
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AddToCartButton } from "@/components/site/AddToCartButton";
 import { LabReportView } from "@/components/site/LabReportDialog";
 import { ProductIngredientsUse } from "@/components/site/ProductIngredientsUse";
 import { Stars } from "@/components/site/Stars";
@@ -49,7 +52,7 @@ export const Route = createFileRoute("/product/$slug")({
 function ProductDetailPage() {
   const { slug } = Route.useParams();
   const product = getProduct(slug);
-  const { add, profile } = useStore();
+  const { add, profile, cart } = useStore();
 
   if (!product) {
     return (
@@ -66,15 +69,7 @@ function ProductDetailPage() {
   const [selectedOption, setSelectedOption] = useState<string>(
     product.options?.values[0] || ""
   );
-  const [qty, setQty] = useState(1);
   const match = matchesProfile(product, profile);
-
-  const handleAddToCart = () => {
-    add(product.slug, selectedOption || undefined, qty);
-    toast.success(`Added ${qty}x ${product.name} to cart!`, {
-      description: selectedOption ? `Selected: ${selectedOption}` : undefined,
-    });
-  };
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:py-8 sm:px-6 space-y-8">
@@ -212,58 +207,42 @@ function ProductDetailPage() {
             </div>
           )}
 
-          {/* Quantity Stepper & Add to Cart Controls */}
-          <div className="space-y-4 pt-1">
-            <div className="flex items-center gap-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-stone-500">Quantity:</span>
-              <div className="flex items-center rounded-xl border border-stone-200 bg-white">
-                <button
-                  type="button"
-                  onClick={() => setQty((q) => Math.max(1, q - 1))}
-                  disabled={qty <= 1}
-                  className="p-2 text-stone-500 hover:text-stone-900 disabled:opacity-30 cursor-pointer"
-                  aria-label="Decrease quantity"
-                >
-                  <Minus className="size-3.5" />
-                </button>
-                <span className="w-8 text-center font-bold text-xs text-stone-900">{qty}</span>
-                <button
-                  type="button"
-                  onClick={() => setQty((q) => Math.min(product.stock, q + 1))}
-                  disabled={qty >= product.stock}
-                  className="p-2 text-stone-500 hover:text-stone-900 disabled:opacity-30 cursor-pointer"
-                  aria-label="Increase quantity"
-                >
-                  <Plus className="size-3.5" />
-                </button>
-              </div>
-            </div>
+          {/* Animated Add to Cart & Controls */}
+          <div className="space-y-3 pt-2">
+            <AddToCartButton
+              product={product}
+              selectedOption={selectedOption}
+              size="xl"
+              showPrice
+            />
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-3">
-              <Button
-                size="xl"
-                disabled={product.stock <= 0}
-                onClick={handleAddToCart}
-                className="w-full sm:flex-1 bg-[#D9622B] hover:bg-[#C4531E] text-white font-bold rounded-xl shadow-lg shadow-sky-500/20"
-              >
-                <ShoppingBag className="size-4 mr-2" /> Add to Cart
-              </Button>
-
-              {/* Disabled Buy Button (catalog demonstration mode) */}
-              <div className="w-full sm:flex-1 relative group">
+            {/* Secondary Action: Direct Checkout or Demo Mode */}
+            <div className="flex items-center gap-3">
+              {cart.some((l) => l.slug === product.slug && (selectedOption ? l.option === selectedOption : true)) ? (
                 <Button
+                  asChild
                   size="xl"
-                  variant="outline"
-                  disabled
-                  className="w-full border-stone-200 bg-stone-50 text-stone-400 cursor-not-allowed font-bold rounded-xl"
+                  className="w-full bg-stone-900 hover:bg-black text-white font-bold rounded-xl shadow-md cursor-pointer transition-all"
                 >
-                  Buy Now (Catalog Preview)
+                  <Link to="/cart">
+                    <ShoppingBag className="size-4 mr-2" /> Proceed to Cart & Checkout →
+                  </Link>
                 </Button>
-                <div className="absolute -top-12 left-1/2 -translate-x-1/2 hidden group-hover:block w-64 rounded-lg bg-stone-100 border border-stone-300 text-stone-900 p-2 text-[11px] text-center shadow-xl z-20 pointer-events-none">
-                  Direct instant checkout is paused in catalog demonstration mode. Please add items to cart!
+              ) : (
+                <div className="w-full relative group">
+                  <Button
+                    size="xl"
+                    variant="outline"
+                    disabled
+                    className="w-full border-stone-200 bg-stone-50 text-stone-400 cursor-not-allowed font-bold rounded-xl"
+                  >
+                    Buy Now (Catalog Preview)
+                  </Button>
+                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 hidden group-hover:block w-64 rounded-lg bg-stone-100 border border-stone-300 text-stone-900 p-2 text-[11px] text-center shadow-xl z-20 pointer-events-none">
+                    Direct instant checkout is paused in catalog demonstration mode. Please add items to cart!
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Amazon-style Dropship & 10-day return notice */}
@@ -282,25 +261,51 @@ function ProductDetailPage() {
       {/* Tabs Section: Product Specs, Lab Report, Ingredients, Reviews, Returns */}
       <div className="mt-12 border-t border-stone-200 pt-8">
         <Tabs defaultValue={product.labReport ? "lab" : "overview"} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 h-auto p-1 bg-white border border-stone-200 rounded-2xl mb-6">
-            <TabsTrigger value="overview" className="py-2 text-xs font-bold uppercase tracking-wider text-stone-700">
-              Overview
-            </TabsTrigger>
-            {product.labReport && (
-              <TabsTrigger value="lab" className="py-2 text-xs font-bold uppercase tracking-wider text-[#D9622B]">
-                🔬 Lab Report (CoA)
+          <div className="w-full overflow-x-auto scrollbar-none pb-2 pt-1 -mx-2 px-2 sm:mx-0 sm:px-0">
+            <TabsList
+              className={`flex w-max sm:w-full items-center justify-start sm:grid ${
+                product.labReport ? "sm:grid-cols-5" : "sm:grid-cols-4"
+              } gap-1.5 p-1.5 bg-[#FAF7F2] border border-stone-200/90 rounded-2xl shadow-xs`}
+            >
+              <TabsTrigger
+                value="overview"
+                className="shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:px-2 md:px-3 text-xs sm:text-[11px] lg:text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer whitespace-nowrap min-h-[42px] border border-transparent data-[state=active]:border-[#D9622B] data-[state=active]:bg-[#D9622B] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-white data-[state=inactive]:text-stone-700 data-[state=inactive]:border-stone-200 hover:text-stone-900 hover:border-stone-300"
+              >
+                <FileText className="size-3.5 shrink-0" />
+                <span>Overview</span>
               </TabsTrigger>
-            )}
-            <TabsTrigger value="nutrition" className="py-2 text-xs font-bold uppercase tracking-wider text-stone-700">
-              {isEdible(product) ? "🧪 Ingredients & Aminos" : "Materials & Specs"}
-            </TabsTrigger>
-            <TabsTrigger value="reviews" className="py-2 text-xs font-bold uppercase tracking-wider text-stone-700">
-              Reviews ({product.reviewsCount})
-            </TabsTrigger>
-            <TabsTrigger value="returns" className="py-2 text-xs font-bold uppercase tracking-wider text-stone-700">
-              10-Day Returns
-            </TabsTrigger>
-          </TabsList>
+              {product.labReport && (
+                <TabsTrigger
+                  value="lab"
+                  className="shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:px-2 md:px-3 text-xs sm:text-[11px] lg:text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer whitespace-nowrap min-h-[42px] border border-transparent data-[state=active]:border-[#D9622B] data-[state=active]:bg-[#D9622B] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-white data-[state=inactive]:text-stone-700 data-[state=inactive]:border-stone-200 hover:text-stone-900 hover:border-stone-300"
+                >
+                  <FlaskConical className="size-3.5 shrink-0" />
+                  <span>Lab Report</span>
+                </TabsTrigger>
+              )}
+              <TabsTrigger
+                value="nutrition"
+                className="shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:px-2 md:px-3 text-xs sm:text-[11px] lg:text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer whitespace-nowrap min-h-[42px] border border-transparent data-[state=active]:border-[#D9622B] data-[state=active]:bg-[#D9622B] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-white data-[state=inactive]:text-stone-700 data-[state=inactive]:border-stone-200 hover:text-stone-900 hover:border-stone-300"
+              >
+                <Zap className="size-3.5 shrink-0" />
+                <span>{isEdible(product) ? "Ingredients & Aminos" : "Materials & Specs"}</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="reviews"
+                className="shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:px-2 md:px-3 text-xs sm:text-[11px] lg:text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer whitespace-nowrap min-h-[42px] border border-transparent data-[state=active]:border-[#D9622B] data-[state=active]:bg-[#D9622B] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-white data-[state=inactive]:text-stone-700 data-[state=inactive]:border-stone-200 hover:text-stone-900 hover:border-stone-300"
+              >
+                <Star className="size-3.5 shrink-0" />
+                <span>Reviews ({product.reviewsCount})</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="returns"
+                className="shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2.5 sm:px-2 md:px-3 text-xs sm:text-[11px] lg:text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer whitespace-nowrap min-h-[42px] border border-transparent data-[state=active]:border-[#D9622B] data-[state=active]:bg-[#D9622B] data-[state=active]:text-white data-[state=active]:shadow-md data-[state=inactive]:bg-white data-[state=inactive]:text-stone-700 data-[state=inactive]:border-stone-200 hover:text-stone-900 hover:border-stone-300"
+              >
+                <RotateCcw className="size-3.5 shrink-0" />
+                <span>10-Day Returns</span>
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
           {/* TAB 1: OVERVIEW */}
           <TabsContent value="overview" className="space-y-6">
