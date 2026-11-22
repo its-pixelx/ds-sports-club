@@ -19,13 +19,13 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       viewport={{ once: true, margin: "-20px" }}
       transition={{ duration: 0.45, delay: (index % 4) * 0.05 }}
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-[#0c121e] shadow-md hover:border-slate-700 transition-colors"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-[0_2px_12px_-2px_rgba(40,30,20,0.05)] hover:border-stone-300 hover:shadow-[0_8px_24px_-4px_rgba(40,30,20,0.09)] transition-all"
     >
       {/* Product Image Link */}
       <Link
         to="/product/$slug"
         params={{ slug: product.slug }}
-        className="relative block aspect-square overflow-hidden bg-slate-900"
+        className="relative block aspect-square overflow-hidden bg-[#F5F0E8]"
       >
         <img
           src={product.image}
@@ -37,46 +37,46 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
         {/* Badges on Image */}
         <div className="absolute left-2.5 top-2.5 flex flex-col gap-1.5">
           {product.labReport && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-slate-950/90 border border-slate-700/80 px-2.5 py-0.5 text-[10px] font-bold text-sky-400 backdrop-blur-sm shadow">
+            <span className="inline-flex items-center gap-1 rounded-full bg-white/95 border border-emerald-600/30 px-2.5 py-0.5 text-[10px] font-bold text-emerald-700 backdrop-blur-sm shadow-sm">
               <FlaskConical className="size-3" /> Lab tested
             </span>
           )}
           {match && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-sky-400 px-2.5 py-0.5 text-[10px] font-black text-slate-950 shadow">
+            <span className="inline-flex items-center gap-1 rounded-full bg-[#D9622B] px-2.5 py-0.5 text-[10px] font-black text-white shadow-sm">
               <Sparkles className="size-3" /> For you
             </span>
           )}
         </div>
 
-        <span className="absolute right-2.5 top-2.5 rounded-full bg-slate-950/80 border border-slate-800 px-2 py-0.5 text-[10px] font-black text-slate-200">
+        <span className="absolute right-2.5 top-2.5 rounded-full bg-stone-900/90 border border-stone-800 px-2 py-0.5 text-[10px] font-black text-white shadow-sm">
           -{discount(product)}%
         </span>
       </Link>
 
       {/* Product Information */}
       <div className="flex flex-1 flex-col gap-1 p-3.5 sm:p-4">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-stone-500">
           {product.brand}
         </p>
 
         <Link
           to="/product/$slug"
           params={{ slug: product.slug }}
-          className="line-clamp-2 text-xs sm:text-sm font-bold text-white hover:text-sky-300 transition-colors leading-snug"
+          className="line-clamp-2 text-xs sm:text-sm font-bold text-stone-900 hover:text-[#D9622B] transition-colors leading-snug"
         >
           {product.name}
         </Link>
 
-        <div className="flex items-center gap-1.5 text-[11px] text-slate-400 my-0.5">
+        <div className="flex items-center gap-1.5 text-[11px] text-stone-500 my-0.5">
           <Stars rating={product.rating} />
           <span>{product.rating} ({product.reviewsCount.toLocaleString("en-IN")})</span>
         </div>
 
         <div className="mt-auto flex items-end justify-between pt-2">
           <div>
-            <p className="text-sm sm:text-base font-black text-white">
+            <p className="text-sm sm:text-base font-black text-stone-950">
               {formatINR(product.price)}{" "}
-              <span className="text-[11px] font-normal text-slate-500 line-through">
+              <span className="text-[11px] font-normal text-stone-400 line-through">
                 {formatINR(product.mrp)}
               </span>
             </p>
@@ -92,7 +92,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               toast.success("Added to cart", { description: product.name });
             }}
             aria-label={`Add ${product.name} to cart`}
-            className="grid size-8 sm:size-9 place-items-center rounded-xl bg-slate-800 border border-slate-700 text-white transition-all hover:bg-sky-400 hover:text-slate-950 hover:border-sky-400 disabled:opacity-30 cursor-pointer"
+            className="grid size-8 sm:size-9 place-items-center rounded-xl bg-stone-100 border border-stone-200 text-stone-800 transition-all hover:bg-[#D9622B] hover:text-white hover:border-[#D9622B] disabled:opacity-30 cursor-pointer shadow-sm"
           >
             <Plus className="size-4" />
           </motion.button>

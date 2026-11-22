@@ -3,9 +3,10 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, BadgeCheck, Dumbbell, Flame, FlaskConical, RotateCcw, ShieldCheck, Sparkles, Truck } from "lucide-react";
 import { useRef } from "react";
 import hero from "@/assets/hero-athlete.jpg";
-import logoWhite from "@/assets/logo-white.png";
+import logoClean from "@/assets/logo-clean.png";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/site/ProductCard";
+import { ScrollRow } from "@/components/site/ScrollRow";
 import { CATEGORIES, PRODUCTS } from "@/data/products";
 
 export const Route = createFileRoute("/")({
@@ -27,6 +28,31 @@ const CAT_IMG: Record<string, string> = Object.fromEntries(
   CATEGORIES.map((c) => [c.id, PRODUCTS.find((p) => p.category === c.id)?.image ?? ""]),
 );
 
+// Extended collections for category showcase
+const SHOWCASE_COLLECTIONS = [
+  ...CATEGORIES.map((c) => ({
+    id: c.id,
+    label: c.label,
+    blurb: c.blurb,
+    image: CAT_IMG[c.id],
+    search: { category: c.id },
+  })),
+  {
+    id: "bulking-stack",
+    label: "Bulking & Mass Stacks",
+    blurb: "Caloric dense gainers and pure Creapure creatine for muscle building",
+    image: PRODUCTS.find((p) => p.slug === "muscleblaze-super-gainer-xxl")?.image ?? "",
+    search: { goal: "bulking" as const },
+  },
+  {
+    id: "mobility-yoga",
+    label: "Yoga & Flexibility",
+    blurb: "Manduka non-slip mats and loop resistance bands",
+    image: PRODUCTS.find((p) => p.slug === "manduka-pro-yoga-mat")?.image ?? "",
+    search: { goal: "yoga" as const },
+  },
+];
+
 function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -35,31 +61,33 @@ function Hero() {
   const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   return (
-    <section ref={ref} className="relative isolate flex min-h-[calc(100svh-4rem)] items-center sm:items-end overflow-hidden bg-[#090d14] text-white">
+    <section ref={ref} className="relative isolate flex min-h-[calc(100svh-4rem)] items-center sm:items-end overflow-hidden bg-[#1A1715] text-white">
       {/* Background Hero Image */}
       <motion.img
         src={hero}
         alt="D&S Sports Club Athlete"
         style={{ y, scale }}
-        className="absolute inset-0 -z-10 size-full object-cover object-[55%_center] opacity-30 mix-blend-luminosity"
+        className="absolute inset-0 -z-10 size-full object-cover object-[55%_center] opacity-35 mix-blend-luminosity"
       />
-      {/* Clean, minimalist dark gradient overlays */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#090d14] via-[#090d14]/75 to-transparent" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#090d14]/95 via-[#090d14]/60 to-transparent" />
+      {/* Warm rich gradient overlays */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#1A1715] via-[#1A1715]/75 to-transparent" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#1A1715]/95 via-[#1A1715]/60 to-transparent" />
 
       <motion.div style={{ opacity: fade }} className="mx-auto w-full max-w-7xl px-4 pb-12 pt-16 sm:px-6 md:pb-20">
-        {/* Minimalist Welcome Pill */}
+        {/* Minimalist Warm Welcome Pill */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-slate-700/60 bg-slate-900/80 px-3.5 py-1 backdrop-blur-md"
+          className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-stone-600/70 bg-stone-900/80 px-3.5 py-1.5 backdrop-blur-md shadow-md"
         >
-          <img src={logoWhite} alt="D&S Logo" className="h-4 w-auto object-contain" />
-          <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-300">
+          <div className="rounded-full bg-white p-0.5">
+            <img src={logoClean} alt="D&S Logo" className="h-3.5 w-auto object-contain" />
+          </div>
+          <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-stone-200">
             Welcome to <strong className="text-white">D&S Sports Club</strong>
           </span>
-          <span className="size-1.5 rounded-full bg-sky-400 animate-pulse" />
+          <span className="size-1.5 rounded-full bg-[#D9622B] animate-pulse" />
         </motion.div>
 
         {/* Minimalist Peak Animation Headline */}
@@ -75,7 +103,7 @@ function Hero() {
                   ease: [0.16, 1, 0.3, 1],
                 }}
                 className={`inline-block ${
-                  i === 3 ? "text-sky-400" : i === 1 ? "text-slate-400" : "text-white"
+                  i === 3 ? "text-[#D9622B]" : i === 1 ? "text-stone-300" : "text-white"
                 }`}
               >
                 {w}
@@ -91,7 +119,7 @@ function Hero() {
           transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 flex max-w-2xl flex-col gap-6"
         >
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-stone-300 leading-relaxed font-normal">
             A verified sports and gym marketplace built for beginner guidance, certified batch lab reports, and Amazon-style 10-day returns. Choose your path below:
           </p>
 
@@ -101,7 +129,7 @@ function Hero() {
             <Button
               asChild
               size="xl"
-              className="bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold tracking-wide rounded-xl shadow-lg shadow-sky-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="bg-[#D9622B] hover:bg-[#C4531E] text-white font-bold tracking-wide rounded-xl shadow-lg shadow-[#D9622B]/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <Link to="/quiz">
                 <Sparkles className="size-4 mr-2" />
@@ -115,7 +143,7 @@ function Hero() {
               asChild
               variant="outline"
               size="xl"
-              className="border-slate-700 bg-slate-900/80 text-slate-100 hover:bg-slate-800 hover:text-white rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="border-stone-500 bg-stone-900/80 text-stone-100 hover:bg-stone-800 hover:text-white rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <Link to="/shop">
                 Go to Store <ArrowRight className="size-4 ml-1 opacity-70" />
@@ -124,17 +152,17 @@ function Hero() {
           </div>
 
           {/* Minimalist Trust Points */}
-          <div className="flex flex-wrap items-center gap-3 pt-2 text-xs text-slate-400 font-medium">
+          <div className="flex flex-wrap items-center gap-3 pt-2 text-xs text-stone-300 font-medium">
             <span className="flex items-center gap-1.5">
-              <FlaskConical className="size-3.5 text-sky-400" /> NABL Lab Reports
+              <FlaskConical className="size-3.5 text-[#D9622B]" /> NABL Lab Reports
             </span>
-            <span className="text-slate-600">•</span>
+            <span className="text-stone-500">•</span>
             <span className="flex items-center gap-1.5">
-              <RotateCcw className="size-3.5 text-sky-400" /> 10-Day Doorstep Returns
+              <RotateCcw className="size-3.5 text-[#D9622B]" /> 10-Day Doorstep Returns
             </span>
-            <span className="text-slate-600">•</span>
+            <span className="text-stone-500">•</span>
             <span className="flex items-center gap-1.5">
-              <Truck className="size-3.5 text-sky-400" /> Free Shipping &gt; ₹999
+              <Truck className="size-3.5 text-[#D9622B]" /> Free Shipping &gt; ₹999
             </span>
           </div>
         </motion.div>
@@ -159,14 +187,14 @@ function Hero() {
               whileHover={{ scale: 1.05, x: -4 }}
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 4, repeat: Infinity, delay: i * 0.6 }}
-              className="flex items-center gap-3.5 rounded-2xl border border-slate-800/80 bg-slate-900/80 px-4 py-3 backdrop-blur-md shadow-xl"
+              className="flex items-center gap-3.5 rounded-2xl border border-stone-700/80 bg-stone-900/80 px-4 py-3 backdrop-blur-md shadow-xl"
             >
-              <div className="grid size-8 place-items-center rounded-xl bg-sky-400/10 text-sky-400">
+              <div className="grid size-8 place-items-center rounded-xl bg-[#D9622B]/20 text-[#D9622B]">
                 <I className="size-4" />
               </div>
               <div>
                 <p className="font-display text-xl font-black text-white leading-none">{a as string}</p>
-                <p className="text-[11px] text-slate-400 mt-0.5">{b as string}</p>
+                <p className="text-[11px] text-stone-300 mt-0.5">{b as string}</p>
               </div>
             </motion.div>
           );
@@ -189,12 +217,12 @@ function Marquee() {
   ];
 
   return (
-    <div className="overflow-hidden border-y border-slate-800/80 bg-[#0b101c] py-2.5 text-slate-300">
-      <div className="marquee flex w-max gap-8 font-display text-xs sm:text-sm font-semibold uppercase tracking-wider">
+    <div className="overflow-hidden border-y border-stone-200/80 bg-[#F2ECE4] py-3 text-stone-800">
+      <div className="marquee flex w-max gap-8 font-display text-xs sm:text-sm font-bold uppercase tracking-wider">
         {[...items, ...items].map((t, i) => (
           <span key={i} className="flex items-center gap-8">
             {t}
-            <span className="text-sky-400 text-xs">✦</span>
+            <span className="text-[#D9622B] text-xs">✦</span>
           </span>
         ))}
       </div>
@@ -203,103 +231,101 @@ function Marquee() {
 }
 
 function Index() {
-  const featured = PRODUCTS.filter((p) => p.stock > 0).slice(0, 8);
+  const featured = PRODUCTS.filter((p) => p.stock > 0);
 
   return (
-    <div className="space-y-16 sm:space-y-24">
+    <div className="space-y-16 sm:space-y-24 bg-[#FAF7F2] pb-12">
       <Hero />
       <Marquee />
 
-      {/* Categories Grid */}
+      {/* Categories Scrollable Showcase with Left & Right Arrows */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="mb-8 flex items-end justify-between">
+        <div className="mb-6 flex items-end justify-between">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-sky-400">Departments</p>
-            <h2 className="font-display text-3xl sm:text-4xl font-black uppercase text-white">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#D9622B]">Departments</p>
+            <h2 className="font-display text-3xl sm:text-4xl font-black uppercase text-stone-900">
               Shop by Category
             </h2>
           </div>
           <Link
             to="/shop"
-            className="text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-colors flex items-center gap-1"
+            className="text-xs sm:text-sm font-bold text-stone-600 hover:text-[#D9622B] transition-colors flex items-center gap-1"
           >
             All Products <ArrowRight className="size-3.5" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
-          {CATEGORIES.map((c, i) => (
-            <motion.div
+        {/* Minimal Variable Scrollable Category Row with Left & Right Arrows */}
+        <ScrollRow scrollAmount={300} className="gap-4 pb-2">
+          {SHOWCASE_COLLECTIONS.map((c) => (
+            <Link
               key={c.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
+              to="/shop"
+              search={c.search}
+              className="group relative block w-[210px] sm:w-[250px] md:w-[280px] shrink-0 aspect-[4/5] overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-sm hover:shadow-md transition-all"
             >
-              <Link
-                to="/shop"
-                search={{ category: c.id }}
-                className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-md"
-              >
-                <img
-                  src={CAT_IMG[c.id]}
-                  alt={c.label}
-                  loading="lazy"
-                  className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-4 text-white">
-                  <p className="font-display text-xl sm:text-2xl font-black uppercase tracking-tight">{c.label}</p>
-                  <p className="text-[11px] text-slate-300 mt-0.5 line-clamp-1">{c.blurb}</p>
-                </div>
-              </Link>
-            </motion.div>
+              <img
+                src={c.image}
+                alt={c.label}
+                loading="lazy"
+                className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/25 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+                <p className="font-display text-xl sm:text-2xl font-black uppercase tracking-tight">{c.label}</p>
+                <p className="text-[11px] text-stone-200 mt-0.5 line-clamp-1">{c.blurb}</p>
+              </div>
+            </Link>
           ))}
-        </div>
+        </ScrollRow>
       </section>
 
-      {/* Best Sellers Showcase */}
+      {/* Best Sellers Scrollable Carousel with Left & Right Arrows */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="mb-8 flex items-end justify-between">
+        <div className="mb-6 flex items-end justify-between">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-sky-400">Top Rated</p>
-            <h2 className="font-display text-3xl sm:text-4xl font-black uppercase text-white">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#D9622B]">Top Rated</p>
+            <h2 className="font-display text-3xl sm:text-4xl font-black uppercase text-stone-900">
               Best Sellers
             </h2>
           </div>
-          <Link to="/shop" className="text-xs sm:text-sm font-semibold text-slate-300 hover:text-white">
+          <Link to="/shop" className="text-xs sm:text-sm font-bold text-stone-600 hover:text-[#D9622B]">
             See All Items →
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+
+        {/* Amazon-Style Minimalist Product Scroll Carousel with Left & Right Arrows */}
+        <ScrollRow scrollAmount={300} className="gap-4 pb-2">
           {featured.map((p, i) => (
-            <ProductCard key={p.slug} product={p} index={i} />
+            <div key={p.slug} className="w-[195px] sm:w-[230px] md:w-[260px] shrink-0">
+              <ProductCard product={p} index={i} />
+            </div>
           ))}
-        </div>
+        </ScrollRow>
       </section>
 
       {/* Authenticated Lab Report & Transparency Section */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid overflow-hidden rounded-3xl border border-slate-800 bg-[#0c121e] text-white md:grid-cols-2 shadow-xl">
+        <div className="grid overflow-hidden rounded-3xl border border-stone-200/90 bg-white text-stone-900 md:grid-cols-2 shadow-sm">
           <div className="p-6 sm:p-10 flex flex-col justify-between space-y-6">
             <div>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-400/30 bg-sky-400/10 px-3 py-1 text-xs font-bold text-sky-400">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-600/20 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
                 <BadgeCheck className="size-4" /> Lab Reports Authenticated
               </span>
-              <h2 className="mt-4 font-display text-3xl sm:text-4xl font-black uppercase leading-tight">
+              <h2 className="mt-4 font-display text-3xl sm:text-4xl font-black uppercase leading-tight text-stone-900">
                 Know Exactly What You Put In Your Body.
               </h2>
-              <p className="mt-3 text-sm text-slate-300 leading-relaxed">
+              <p className="mt-3 text-sm text-stone-600 leading-relaxed font-normal">
                 Every protein, mass gainer, creatine, and vitamin tub sold on D&S Sports Club includes an independent Certificate of Analysis (CoA) from accredited laboratories (Equinox Labs / NABL). Inspect protein purity, zero amino spiking, and absence of heavy metals before ordering.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 pt-2">
-              <Button asChild size="lg" className="bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold rounded-xl">
+              <Button asChild size="lg" className="bg-[#D9622B] hover:bg-[#C4531E] text-white font-bold rounded-xl shadow-md shadow-[#D9622B]/20">
                 <Link to="/certificates">
                   <FlaskConical className="size-4 mr-2" /> View Lab Certificates
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800 rounded-xl">
+              <Button asChild variant="outline" size="lg" className="border-stone-300 bg-stone-50 text-stone-800 hover:bg-stone-100 rounded-xl">
                 <Link to="/shop" search={{ category: "supplements" }}>
                   Browse Supplements
                 </Link>
@@ -307,7 +333,7 @@ function Index() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-800/80">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-stone-200">
             {[
               [FlaskConical, "NABL Accredited Testing", "Third-party laboratory analysis for every edible batch"],
               [BadgeCheck, "Zero Amino Spiking", "Purity verified for intact protein and real BCAAs"],
@@ -316,12 +342,12 @@ function Index() {
             ].map(([Icon, t, d]) => {
               const I = Icon as typeof FlaskConical;
               return (
-                <div key={t as string} className="bg-[#0c121e] p-6 flex flex-col justify-center">
-                  <div className="grid size-9 place-items-center rounded-xl bg-sky-400/10 text-sky-400">
+                <div key={t as string} className="bg-[#FAF7F2] p-6 flex flex-col justify-center">
+                  <div className="grid size-9 place-items-center rounded-xl bg-[#D9622B]/10 text-[#D9622B]">
                     <I className="size-4" />
                   </div>
-                  <p className="mt-3 font-bold text-white text-sm sm:text-base">{t as string}</p>
-                  <p className="mt-1 text-xs text-slate-400 leading-relaxed">{d as string}</p>
+                  <p className="mt-3 font-bold text-stone-900 text-sm sm:text-base">{t as string}</p>
+                  <p className="mt-1 text-xs text-stone-500 leading-relaxed">{d as string}</p>
                 </div>
               );
             })}

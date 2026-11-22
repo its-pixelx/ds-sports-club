@@ -45,36 +45,36 @@
 
 :root {
   --radius: 0.75rem;
-  /* Premium Minimalist Dark Athletic Theme */
-  --background: #090d14;
-  --foreground: #f8fafc;
-  --card: #0f1523;
-  --card-foreground: #f8fafc;
-  --popover: #0f1523;
-  --popover-foreground: #f8fafc;
-  --primary: #f8fafc;
-  --primary-foreground: #090d14;
-  --secondary: #172033;
-  --secondary-foreground: #f8fafc;
-  --muted: #131b2e;
-  --muted-foreground: #94a3b8;
-  --accent: #1e293b;
-  --accent-foreground: #f8fafc;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #1e293b;
-  --input: #1e293b;
-  --ring: #38bdf8;
-  /* Clean metallic & icy athletic accents instead of loud neon */
-  --volt: #38bdf8;
-  --volt-foreground: #090d14;
-  --ink: #06090e;
-  --ink-foreground: #f8fafc;
-  --ink-muted: #94a3b8;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --star: #fbbf24;
-  --shadow-card-v: 0 4px 20px -2px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+  /* Premium Warm Minimalist Athletic Theme */
+  --background: #FAF7F2;
+  --foreground: #1C1917;
+  --card: #FFFFFF;
+  --card-foreground: #1C1917;
+  --popover: #FFFFFF;
+  --popover-foreground: #1C1917;
+  --primary: #D9622B;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F3ECE4;
+  --secondary-foreground: #292524;
+  --muted: #F5EFEB;
+  --muted-foreground: #78716C;
+  --accent: #EFE8DE;
+  --accent-foreground: #1C1917;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --border: #E7E1D8;
+  --input: #E7E1D8;
+  --ring: #D9622B;
+  /* Warm energetic athletic accents */
+  --volt: #D9622B;
+  --volt-foreground: #FFFFFF;
+  --ink: #1C1917;
+  --ink-foreground: #FAF7F2;
+  --ink-muted: #78716C;
+  --success: #059669;
+  --warning: #D97706;
+  --star: #F59E0B;
+  --shadow-card-v: 0 4px 20px -2px rgba(44, 30, 18, 0.05), 0 1px 3px rgba(44, 30, 18, 0.03);
 }
 
 @layer base {
@@ -98,7 +98,7 @@
 
 @utility text-outline {
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(248, 250, 252, 0.4);
+  -webkit-text-stroke: 1.5px rgba(28, 25, 23, 0.3);
 }
 
 @utility marquee {
@@ -116,12 +116,12 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d14;
+  background: #FAF7F2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #D6CEC3;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #B8ADA0;
 }

@@ -84,39 +84,39 @@ function ReturnsPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 space-y-10">
       {/* Top Banner */}
-      <div className="rounded-3xl border border-slate-800 bg-[#0c121e] p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+      <div className="rounded-3xl border border-stone-200 bg-white p-6 sm:p-10 text-stone-900 shadow-xl relative overflow-hidden">
         <div className="max-w-3xl space-y-3">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-400/30 bg-sky-400/10 px-3 py-1 text-xs font-bold text-sky-400">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#D9622B]/30 bg-[#D9622B]/10 px-3 py-1 text-xs font-bold text-[#D9622B]">
             <RotateCcw className="size-4" /> Amazon-Style Hassle-Free Returns
           </span>
           <h1 className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight">
             10-Day Returns & Refunds Center
           </h1>
-          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
             We want your fitness journey to be completely worry-free. If any equipment or supplement does not match your expectations, start an easy return below. We provide 100% free doorstep pickup and instant refunds directly to your bank account or UPI.
           </p>
         </div>
 
         {/* 4-Step Process Visualizer */}
-        <div className="mt-8 grid grid-cols-1 gap-3.5 sm:grid-cols-4 pt-6 border-t border-slate-800">
+        <div className="mt-8 grid grid-cols-1 gap-3.5 sm:grid-cols-4 pt-6 border-t border-stone-200">
           {[
             { step: "01", title: "Request Return", desc: "Select order and reason in 60 seconds", icon: RotateCcw },
             { step: "02", title: "Free Doorstep Pickup", desc: "Courier partner collects parcel from your address", icon: Truck },
             { step: "03", title: "Quick Check", desc: "Fast hub check for original packaging & safety tags", icon: PackageCheck },
             { step: "04", title: "Instant Refund", desc: "Refund credited to UPI / Bank within 24–48 hours", icon: CheckCircle2 },
           ].map((s) => (
-            <div key={s.step} className="rounded-2xl border border-slate-800 bg-[#090d14]/70 p-4 space-y-1">
-              <span className="font-display text-2xl font-black text-sky-400">{s.step}</span>
-              <p className="font-bold text-xs sm:text-sm text-white">{s.title}</p>
-              <p className="text-[11px] text-slate-400">{s.desc}</p>
+            <div key={s.step} className="rounded-2xl border border-stone-200 bg-[#FAF7F2]/70 p-4 space-y-1">
+              <span className="font-display text-2xl font-black text-[#D9622B]">{s.step}</span>
+              <p className="font-bold text-xs sm:text-sm text-stone-900">{s.title}</p>
+              <p className="text-[11px] text-stone-500">{s.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Main Interactive Return Flow */}
-      <div className="rounded-3xl border border-slate-800 bg-[#0c121e] p-5 sm:p-8 shadow-sm">
-        <h2 className="font-display text-2xl sm:text-3xl font-black uppercase text-white mb-5">
+      <div className="rounded-3xl border border-stone-200 bg-white p-5 sm:p-8 shadow-sm">
+        <h2 className="font-display text-2xl sm:text-3xl font-black uppercase text-stone-900 mb-5">
           Start a Return Request
         </h2>
 
@@ -124,7 +124,7 @@ function ReturnsPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Step 1: Select Demo Order */}
             <div className="space-y-2.5">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block">
                 1. Select Order:
               </label>
               <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
@@ -138,16 +138,16 @@ function ReturnsPage() {
                     }}
                     className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
                       selectedOrder.id === ord.id
-                        ? "border-sky-400 bg-sky-400/10 text-white shadow-md ring-1 ring-sky-400"
-                        : "border-slate-800 bg-[#090d14] hover:border-slate-700"
+                        ? "border-[#D9622B] bg-[#D9622B]/10 text-stone-900 shadow-md ring-1 ring-sky-400"
+                        : "border-stone-200 bg-[#FAF7F2] hover:border-stone-300"
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold font-mono text-xs sm:text-sm text-white">Order #{ord.id}</span>
+                      <span className="font-bold font-mono text-xs sm:text-sm text-stone-900">Order #{ord.id}</span>
                       <span className="text-[10px] font-semibold text-emerald-400">{ord.status}</span>
                     </div>
-                    <p className="text-[11px] text-slate-400 mt-1">{ord.date}</p>
-                    <p className="text-[11px] text-slate-300 font-medium mt-1">
+                    <p className="text-[11px] text-stone-500 mt-1">{ord.date}</p>
+                    <p className="text-[11px] text-stone-700 font-medium mt-1">
                       {ord.items.length} item{ord.items.length > 1 ? "s" : ""} in order
                     </p>
                   </button>
@@ -157,7 +157,7 @@ function ReturnsPage() {
 
             {/* Step 2: Choose Item */}
             <div className="space-y-2.5">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block">
                 2. Select Item to Return:
               </label>
               <div className="space-y-2">
@@ -168,15 +168,15 @@ function ReturnsPage() {
                     onClick={() => setSelectedItemIndex(idx)}
                     className={`w-full flex items-center justify-between p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                       selectedItemIndex === idx
-                        ? "border-sky-400 bg-sky-400/10 text-white ring-1 ring-sky-400"
-                        : "border-slate-800 bg-[#090d14] hover:bg-slate-900"
+                        ? "border-[#D9622B] bg-[#D9622B]/10 text-stone-900 ring-1 ring-sky-400"
+                        : "border-stone-200 bg-[#FAF7F2] hover:bg-stone-50"
                     }`}
                   >
                     <div>
-                      <p className="font-bold text-xs sm:text-sm text-white">{it.name}</p>
-                      <p className="text-[11px] text-slate-400 mt-0.5">Option: {it.variant}</p>
+                      <p className="font-bold text-xs sm:text-sm text-stone-900">{it.name}</p>
+                      <p className="text-[11px] text-stone-500 mt-0.5">Option: {it.variant}</p>
                     </div>
-                    <span className="font-bold text-xs sm:text-sm text-sky-400 font-mono">{formatINR(it.price)}</span>
+                    <span className="font-bold text-xs sm:text-sm text-[#D9622B] font-mono">{formatINR(it.price)}</span>
                   </button>
                 ))}
               </div>
@@ -184,7 +184,7 @@ function ReturnsPage() {
 
             {/* Step 3: Choose Reason */}
             <div className="space-y-2.5">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block">
                 3. Reason for Return:
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -195,8 +195,8 @@ function ReturnsPage() {
                     onClick={() => setReason(r)}
                     className={`p-3 rounded-xl border text-left text-xs font-medium transition-all cursor-pointer ${
                       reason === r
-                        ? "border-sky-400 bg-sky-400/15 text-white font-bold ring-1 ring-sky-400"
-                        : "border-slate-800 bg-[#090d14] text-slate-300 hover:bg-slate-900"
+                        ? "border-[#D9622B] bg-[#D9622B]/15 text-stone-900 font-bold ring-1 ring-sky-400"
+                        : "border-stone-200 bg-[#FAF7F2] text-stone-700 hover:bg-stone-50"
                     }`}
                   >
                     {r}
@@ -208,14 +208,14 @@ function ReturnsPage() {
                 onChange={(e) => setComments(e.target.value)}
                 placeholder="Additional notes for our logistics pickup partner (optional)..."
                 rows={2}
-                className="w-full rounded-xl border border-slate-800 bg-[#090d14] p-3 text-xs text-white outline-none focus:border-sky-400"
+                className="w-full rounded-xl border border-stone-200 bg-[#FAF7F2] p-3 text-xs text-stone-900 outline-none focus:border-[#D9622B]"
               />
             </div>
 
             {/* Step 4: Resolution & Pickup Slot */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
               <div className="space-y-2">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block">
                   4. Preferred Resolution:
                 </label>
                 <div className="space-y-2">
@@ -224,12 +224,12 @@ function ReturnsPage() {
                     onClick={() => setResolution("refund")}
                     className={`w-full p-3 rounded-xl border text-left text-xs transition-all cursor-pointer ${
                       resolution === "refund"
-                        ? "border-emerald-500 bg-emerald-500/10 font-bold text-white ring-1 ring-emerald-500"
-                        : "border-slate-800 bg-[#090d14] text-slate-400"
+                        ? "border-emerald-500 bg-emerald-500/10 font-bold text-stone-900 ring-1 ring-emerald-500"
+                        : "border-stone-200 bg-[#FAF7F2] text-stone-500"
                     }`}
                   >
-                    <p className="text-xs sm:text-sm font-bold text-white">💰 Instant Bank / UPI Refund</p>
-                    <p className="text-[11px] text-slate-400 mt-0.5">Credited within 24–48 hours of doorstep pickup</p>
+                    <p className="text-xs sm:text-sm font-bold text-stone-900">💰 Instant Bank / UPI Refund</p>
+                    <p className="text-[11px] text-stone-500 mt-0.5">Credited within 24–48 hours of doorstep pickup</p>
                   </button>
 
                   <button
@@ -237,41 +237,41 @@ function ReturnsPage() {
                     onClick={() => setResolution("replace")}
                     className={`w-full p-3 rounded-xl border text-left text-xs transition-all cursor-pointer ${
                       resolution === "replace"
-                        ? "border-sky-400 bg-sky-400/10 font-bold text-white ring-1 ring-sky-400"
-                        : "border-slate-800 bg-[#090d14] text-slate-400"
+                        ? "border-[#D9622B] bg-[#D9622B]/10 font-bold text-stone-900 ring-1 ring-sky-400"
+                        : "border-stone-200 bg-[#FAF7F2] text-stone-500"
                     }`}
                   >
-                    <p className="text-xs sm:text-sm font-bold text-white">🔄 Free Replacement / Exchange</p>
-                    <p className="text-[11px] text-slate-400 mt-0.5">Dispatched as soon as return courier is booked</p>
+                    <p className="text-xs sm:text-sm font-bold text-stone-900">🔄 Free Replacement / Exchange</p>
+                    <p className="text-[11px] text-stone-500 mt-0.5">Dispatched as soon as return courier is booked</p>
                   </button>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block">
                   5. Schedule Free Doorstep Pickup:
                 </label>
                 <select
                   value={slot}
                   onChange={(e) => setSlot(e.target.value)}
-                  className="w-full h-11 rounded-xl border border-slate-800 bg-[#090d14] px-3 text-xs font-semibold text-white outline-none cursor-pointer"
+                  className="w-full h-11 rounded-xl border border-stone-200 bg-[#FAF7F2] px-3 text-xs font-semibold text-stone-900 outline-none cursor-pointer"
                 >
-                  <option value="Tomorrow Morning (9:00 AM – 1:00 PM)" className="bg-slate-900">Tomorrow Morning (9:00 AM – 1:00 PM)</option>
-                  <option value="Tomorrow Afternoon (2:00 PM – 6:00 PM)" className="bg-slate-900">Tomorrow Afternoon (2:00 PM – 6:00 PM)</option>
-                  <option value="Day After Tomorrow (9:00 AM – 1:00 PM)" className="bg-slate-900">Day After Tomorrow (9:00 AM – 1:00 PM)</option>
+                  <option value="Tomorrow Morning (9:00 AM – 1:00 PM)" className="bg-stone-50">Tomorrow Morning (9:00 AM – 1:00 PM)</option>
+                  <option value="Tomorrow Afternoon (2:00 PM – 6:00 PM)" className="bg-stone-50">Tomorrow Afternoon (2:00 PM – 6:00 PM)</option>
+                  <option value="Day After Tomorrow (9:00 AM – 1:00 PM)" className="bg-stone-50">Day After Tomorrow (9:00 AM – 1:00 PM)</option>
                 </select>
-                <p className="text-[11px] text-slate-400 flex items-center gap-1.5 pt-1">
-                  <Truck className="size-3.5 text-sky-400" /> Free pickup across India from registered delivery address
+                <p className="text-[11px] text-stone-500 flex items-center gap-1.5 pt-1">
+                  <Truck className="size-3.5 text-[#D9622B]" /> Free pickup across India from registered delivery address
                 </p>
               </div>
             </div>
 
             {/* Submit Button */}
-            <div className="pt-3 border-t border-slate-800 flex items-center justify-between">
-              <span className="text-xs text-slate-300">
-                Refund value: <strong className="text-white font-mono">{formatINR(selectedOrder.items[selectedItemIndex]?.price || 0)}</strong>
+            <div className="pt-3 border-t border-stone-200 flex items-center justify-between">
+              <span className="text-xs text-stone-700">
+                Refund value: <strong className="text-stone-900 font-mono">{formatINR(selectedOrder.items[selectedItemIndex]?.price || 0)}</strong>
               </span>
-              <Button type="submit" className="bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold text-xs h-10 px-5 rounded-xl">
+              <Button type="submit" className="bg-[#D9622B] hover:bg-[#C4531E] text-white font-bold text-xs h-10 px-5 rounded-xl">
                 Confirm Return & Schedule Pickup <ArrowRight className="size-4 ml-1.5" />
               </Button>
             </div>
@@ -289,32 +289,32 @@ function ReturnsPage() {
               </div>
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-400">Return Authorized</span>
-                <h3 className="font-display text-2xl font-black uppercase text-white">
+                <h3 className="font-display text-2xl font-black uppercase text-stone-900">
                   Pickup Scheduled for Tomorrow
                 </h3>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 rounded-xl border border-slate-800 bg-[#090d14] p-3.5 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 rounded-xl border border-stone-200 bg-[#FAF7F2] p-3.5 text-xs">
               <div>
-                <p className="text-slate-400 uppercase font-semibold text-[10px]">RMA Tracking Code</p>
-                <p className="font-mono text-sm font-bold text-white mt-0.5">{rmaCode}</p>
+                <p className="text-stone-500 uppercase font-semibold text-[10px]">RMA Tracking Code</p>
+                <p className="font-mono text-sm font-bold text-stone-900 mt-0.5">{rmaCode}</p>
               </div>
               <div>
-                <p className="text-slate-400 uppercase font-semibold text-[10px]">Pickup Slot</p>
-                <p className="font-bold text-white mt-0.5">{slot}</p>
+                <p className="text-stone-500 uppercase font-semibold text-[10px]">Pickup Slot</p>
+                <p className="font-bold text-stone-900 mt-0.5">{slot}</p>
               </div>
               <div>
-                <p className="text-slate-400 uppercase font-semibold text-[10px]">Resolution</p>
+                <p className="text-stone-500 uppercase font-semibold text-[10px]">Resolution</p>
                 <p className="font-bold text-emerald-400 mt-0.5 capitalize">
                   {resolution === "refund" ? "Direct Bank / UPI Refund" : "Replacement Order"}
                 </p>
               </div>
             </div>
 
-            <div className="space-y-1.5 text-xs text-slate-300 leading-relaxed">
-              <p className="font-bold text-white">Courier Pickup Instructions:</p>
-              <ul className="list-disc list-inside space-y-0.5 text-slate-400 text-[11px]">
+            <div className="space-y-1.5 text-xs text-stone-700 leading-relaxed">
+              <p className="font-bold text-stone-900">Courier Pickup Instructions:</p>
+              <ul className="list-disc list-inside space-y-0.5 text-stone-500 text-[11px]">
                 <li>Keep the item packed with all accessories, scoops, or original equipment tags.</li>
                 <li>No need to print any label; the courier executive will bring a pre-printed barcode.</li>
                 <li>Upon scan, you will receive an SMS and WhatsApp confirmation with your tracking link.</li>
@@ -325,11 +325,11 @@ function ReturnsPage() {
               <Button
                 variant="outline"
                 onClick={() => setReturnSubmitted(false)}
-                className="text-xs border-slate-800 bg-slate-900 text-slate-200"
+                className="text-xs border-stone-200 bg-stone-50 text-stone-800"
               >
                 Submit Another Return
               </Button>
-              <Button asChild className="text-xs font-bold bg-sky-400 text-slate-950">
+              <Button asChild className="text-xs font-bold bg-[#D9622B] text-white">
                 <Link to="/shop">Continue Browsing Store</Link>
               </Button>
             </div>
@@ -338,38 +338,38 @@ function ReturnsPage() {
       </div>
 
       {/* Return Policy FAQs */}
-      <div className="rounded-3xl border border-slate-800 bg-[#0c121e] p-6 sm:p-8 shadow-sm space-y-5">
+      <div className="rounded-3xl border border-stone-200 bg-white p-6 sm:p-8 shadow-sm space-y-5">
         <div className="space-y-0.5">
-          <span className="text-xs font-bold uppercase tracking-widest text-sky-400">Transparent Policies</span>
-          <h2 className="font-display text-2xl font-black uppercase text-white">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#D9622B]">Transparent Policies</span>
+          <h2 className="font-display text-2xl font-black uppercase text-stone-900">
             Frequently Asked Questions
           </h2>
         </div>
 
-        <Accordion type="single" collapsible className="w-full text-slate-200">
-          <AccordionItem value="faq-1" className="border-slate-800">
-            <AccordionTrigger className="text-xs sm:text-sm font-bold text-left hover:text-sky-300">
+        <Accordion type="single" collapsible className="w-full text-stone-800">
+          <AccordionItem value="faq-1" className="border-stone-200">
+            <AccordionTrigger className="text-xs sm:text-sm font-bold text-left hover:text-[#C4531E]">
               How does D&S Sports Club's 10-day return policy work?
             </AccordionTrigger>
-            <AccordionContent className="text-xs text-slate-400 leading-relaxed">
+            <AccordionContent className="text-xs text-stone-500 leading-relaxed">
               Just like Amazon, you have a full 10-day window from the day of delivery to initiate a return or replacement for any reason. We schedule a free doorstep pickup from your address with zero return shipping fees.
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="faq-2" className="border-slate-800">
-            <AccordionTrigger className="text-xs sm:text-sm font-bold text-left hover:text-sky-300">
+          <AccordionItem value="faq-2" className="border-stone-200">
+            <AccordionTrigger className="text-xs sm:text-sm font-bold text-left hover:text-[#C4531E]">
               Can I return protein tubs or nutritional supplements?
             </AccordionTrigger>
-            <AccordionContent className="text-xs text-slate-400 leading-relaxed">
+            <AccordionContent className="text-xs text-stone-500 leading-relaxed">
               For health, food safety, and NABL chain of custody requirements, edible products must have an intact inner/outer seal. If your product arrived with a broken seal or damaged tub, submit a return immediately and our support team will approve an instant replacement or full refund.
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="faq-3" className="border-slate-800">
-            <AccordionTrigger className="text-xs sm:text-sm font-bold text-left hover:text-sky-300">
+          <AccordionItem value="faq-3" className="border-stone-200">
+            <AccordionTrigger className="text-xs sm:text-sm font-bold text-left hover:text-[#C4531E]">
               How long does it take to receive the refund in my bank account?
             </AccordionTrigger>
-            <AccordionContent className="text-xs text-slate-400 leading-relaxed">
+            <AccordionContent className="text-xs text-stone-500 leading-relaxed">
               Once the courier partner scans the returned package at your doorstep, the refund process is automatically triggered. UPI refunds are credited within 2 to 4 hours; debit/credit card refunds take 24 to 48 banking hours.
             </AccordionContent>
           </AccordionItem>

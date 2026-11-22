@@ -38,22 +38,22 @@ function CartPage() {
   if (count === 0) {
     return (
       <div className="mx-auto max-w-4xl px-4 py-16 sm:py-24 text-center">
-        <div className="mx-auto grid size-16 place-items-center rounded-2xl bg-[#0c121e] border border-slate-800 text-slate-400 mb-5">
+        <div className="mx-auto grid size-16 place-items-center rounded-2xl bg-white border border-stone-200 text-stone-500 mb-5">
           <ShoppingBag className="size-8" />
         </div>
-        <h1 className="font-display text-3xl sm:text-4xl font-black uppercase text-white">
+        <h1 className="font-display text-3xl sm:text-4xl font-black uppercase text-stone-900">
           Your Cart is Empty
         </h1>
-        <p className="mt-2 text-xs sm:text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
+        <p className="mt-2 text-xs sm:text-sm text-stone-500 max-w-md mx-auto leading-relaxed">
           Looks like you haven't added any sports gear or supplements yet. Explore our catalog or take our 2-minute personalized beginner guide!
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Button asChild size="lg" className="bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold rounded-xl text-xs sm:text-sm">
+          <Button asChild size="lg" className="bg-[#D9622B] hover:bg-[#C4531E] text-white font-bold rounded-xl text-xs sm:text-sm">
             <Link to="/quiz">
               <Sparkles className="size-4 mr-2" /> Take Beginner Fit Guide
             </Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="border-slate-800 bg-slate-900 text-slate-200 hover:bg-slate-800 rounded-xl text-xs sm:text-sm">
+          <Button asChild variant="outline" size="lg" className="border-stone-200 bg-stone-50 text-stone-800 hover:bg-stone-100 rounded-xl text-xs sm:text-sm">
             <Link to="/shop">
               Explore All Gear
             </Link>
@@ -66,32 +66,32 @@ function CartPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-800 pb-5">
+      <div className="flex items-center justify-between border-b border-stone-200 pb-5">
         <div>
-          <h1 className="font-display text-3xl sm:text-4xl font-black uppercase text-white">
+          <h1 className="font-display text-3xl sm:text-4xl font-black uppercase text-stone-900">
             Shopping Cart
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-stone-500 mt-1">
             {count} item{count > 1 ? "s" : ""} selected · Covered by Amazon-style 10-day returns
           </p>
         </div>
-        <Link to="/shop" className="hidden sm:flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-white transition-colors">
+        <Link to="/shop" className="hidden sm:flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-stone-500 hover:text-stone-900 transition-colors">
           <ArrowLeft className="size-4" /> Continue Shopping
         </Link>
       </div>
 
       {/* Free Delivery Meter */}
-      <div className="rounded-2xl border border-slate-800 bg-[#0c121e] p-4">
+      <div className="rounded-2xl border border-stone-200 bg-white p-4">
         <div className="flex items-center justify-between text-xs font-semibold mb-2">
-          <span className="flex items-center gap-1.5 text-white">
-            <Truck className="size-4 text-sky-400" />
+          <span className="flex items-center gap-1.5 text-stone-900">
+            <Truck className="size-4 text-[#D9622B]" />
             {isFreeShipping ? "🎉 You've unlocked FREE Express Delivery!" : `Add ${formatINR(remainingForFree)} more for FREE Delivery`}
           </span>
-          <span className="text-slate-400">Threshold: {formatINR(FREE_SHIPPING_THRESHOLD)}</span>
+          <span className="text-stone-500">Threshold: {formatINR(FREE_SHIPPING_THRESHOLD)}</span>
         </div>
-        <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-800">
+        <div className="h-1.5 w-full overflow-hidden rounded-full bg-stone-100">
           <div
-            className="h-full bg-sky-400 transition-all duration-500"
+            className="h-full bg-[#D9622B] transition-all duration-500"
             style={{ width: `${Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100)}%` }}
           />
         </div>
@@ -104,56 +104,56 @@ function CartPage() {
           {lines.map(({ line, product }) => (
             <div
               key={`${line.slug}-${line.option}`}
-              className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-[#0c121e] p-4 shadow-sm"
+              className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm"
             >
               {/* Product Thumbnail & Details */}
               <div className="flex items-center gap-3.5">
                 <Link
                   to="/product/$slug"
                   params={{ slug: product.slug }}
-                  className="size-16 sm:size-20 shrink-0 overflow-hidden rounded-xl border border-slate-800 bg-slate-900"
+                  className="size-16 sm:size-20 shrink-0 overflow-hidden rounded-xl border border-stone-200 bg-stone-50"
                 >
                   <img src={product.image} alt={product.name} className="size-full object-cover" />
                 </Link>
 
                 <div className="space-y-0.5">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-stone-500">
                     {product.brand}
                   </p>
                   <Link
                     to="/product/$slug"
                     params={{ slug: product.slug }}
-                    className="font-bold text-white text-xs sm:text-sm hover:underline line-clamp-1"
+                    className="font-bold text-stone-900 text-xs sm:text-sm hover:underline line-clamp-1"
                   >
                     {product.name}
                   </Link>
                   {line.option && (
-                    <p className="text-[11px] text-slate-400">
-                      Option: <strong className="text-white">{line.option}</strong>
+                    <p className="text-[11px] text-stone-500">
+                      Option: <strong className="text-stone-900">{line.option}</strong>
                     </p>
                   )}
-                  <p className="text-xs font-bold text-sky-400 sm:hidden">
+                  <p className="text-xs font-bold text-[#D9622B] sm:hidden">
                     {formatINR(product.price * line.qty)}
                   </p>
                 </div>
               </div>
 
               {/* Quantity Stepper & Delete */}
-              <div className="flex w-full sm:w-auto items-center justify-between sm:justify-end gap-5 pt-2 sm:pt-0 border-t border-slate-800 sm:border-0">
-                <div className="flex items-center rounded-xl border border-slate-800 bg-[#090d14]">
+              <div className="flex w-full sm:w-auto items-center justify-between sm:justify-end gap-5 pt-2 sm:pt-0 border-t border-stone-200 sm:border-0">
+                <div className="flex items-center rounded-xl border border-stone-200 bg-[#FAF7F2]">
                   <button
                     type="button"
                     onClick={() => setQty(line.slug, line.option, line.qty - 1)}
-                    className="p-1.5 text-slate-400 hover:text-white"
+                    className="p-1.5 text-stone-500 hover:text-stone-900"
                     aria-label="Decrease quantity"
                   >
                     <Minus className="size-3" />
                   </button>
-                  <span className="w-7 text-center text-xs font-bold text-white">{line.qty}</span>
+                  <span className="w-7 text-center text-xs font-bold text-stone-900">{line.qty}</span>
                   <button
                     type="button"
                     onClick={() => setQty(line.slug, line.option, line.qty + 1)}
-                    className="p-1.5 text-slate-400 hover:text-white"
+                    className="p-1.5 text-stone-500 hover:text-stone-900"
                     aria-label="Increase quantity"
                   >
                     <Plus className="size-3" />
@@ -161,16 +161,16 @@ function CartPage() {
                 </div>
 
                 <div className="text-right hidden sm:block">
-                  <p className="font-display text-base font-bold text-white">
+                  <p className="font-display text-base font-bold text-stone-900">
                     {formatINR(product.price * line.qty)}
                   </p>
-                  <p className="text-[10px] text-slate-500">{formatINR(product.price)} each</p>
+                  <p className="text-[10px] text-stone-400">{formatINR(product.price)} each</p>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => remove(line.slug, line.option)}
-                  className="text-slate-500 hover:text-rose-400 p-1.5"
+                  className="text-stone-400 hover:text-rose-400 p-1.5"
                   title="Remove from cart"
                 >
                   <Trash2 className="size-4" />
@@ -180,7 +180,7 @@ function CartPage() {
           ))}
 
           <div className="pt-2">
-            <Button asChild variant="ghost" className="text-slate-400 hover:text-white text-xs">
+            <Button asChild variant="ghost" className="text-stone-500 hover:text-stone-900 text-xs">
               <Link to="/shop">
                 <ArrowLeft className="size-3.5 mr-1.5" /> Continue Shopping
               </Link>
@@ -190,29 +190,29 @@ function CartPage() {
 
         {/* Order Summary Box */}
         <div className="space-y-4">
-          <div className="rounded-2xl border border-slate-800 bg-[#0c121e] p-5 shadow-sm space-y-4">
-            <h2 className="font-display text-lg font-bold uppercase text-white">Order Summary</h2>
+          <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm space-y-4">
+            <h2 className="font-display text-lg font-bold uppercase text-stone-900">Order Summary</h2>
 
-            <div className="space-y-2 text-xs border-b border-slate-800 pb-3">
-              <div className="flex justify-between text-slate-400">
+            <div className="space-y-2 text-xs border-b border-stone-200 pb-3">
+              <div className="flex justify-between text-stone-500">
                 <span>Items Subtotal ({count}):</span>
-                <span className="font-semibold text-white font-mono">{formatINR(subtotal)}</span>
+                <span className="font-semibold text-stone-900 font-mono">{formatINR(subtotal)}</span>
               </div>
-              <div className="flex justify-between text-slate-400">
+              <div className="flex justify-between text-stone-500">
                 <span>Estimated Delivery:</span>
-                <span className="font-semibold text-white">
+                <span className="font-semibold text-stone-900">
                   {shippingFee === 0 ? <span className="text-emerald-400 font-bold">FREE</span> : formatINR(shippingFee)}
                 </span>
               </div>
-              <div className="flex justify-between text-slate-400">
+              <div className="flex justify-between text-stone-500">
                 <span>Taxes & Duties:</span>
-                <span className="font-semibold text-white">Included</span>
+                <span className="font-semibold text-stone-900">Included</span>
               </div>
             </div>
 
             <div className="flex justify-between text-sm font-bold">
-              <span className="text-white">Total Amount:</span>
-              <span className="font-display text-2xl font-black text-white font-mono">{formatINR(total)}</span>
+              <span className="text-stone-900">Total Amount:</span>
+              <span className="font-display text-2xl font-black text-stone-900 font-mono">{formatINR(total)}</span>
             </div>
 
             {/* Disabled Checkout Button with Disclaimer */}
@@ -220,25 +220,25 @@ function CartPage() {
               <Button
                 size="xl"
                 disabled
-                className="w-full bg-slate-800 text-slate-500 opacity-60 cursor-not-allowed font-bold text-xs rounded-xl"
+                className="w-full bg-stone-100 text-stone-400 opacity-60 cursor-not-allowed font-bold text-xs rounded-xl"
               >
                 Proceed to Checkout (Demo Mode)
               </Button>
-              <p className="text-[10px] text-slate-500 text-center leading-relaxed">
+              <p className="text-[10px] text-stone-400 text-center leading-relaxed">
                 Direct online purchasing is paused in demonstration mode while drop-shipping accounts finalize.
               </p>
             </div>
           </div>
 
           {/* Guarantee Badges */}
-          <div className="rounded-2xl border border-slate-800 bg-[#090d14] p-4 space-y-2 text-xs text-slate-400">
-            <div className="flex items-center gap-2 text-white font-semibold">
-              <RotateCcw className="size-3.5 text-sky-400" /> 10-Day Doorstep Returns
+          <div className="rounded-2xl border border-stone-200 bg-[#FAF7F2] p-4 space-y-2 text-xs text-stone-500">
+            <div className="flex items-center gap-2 text-stone-900 font-semibold">
+              <RotateCcw className="size-3.5 text-[#D9622B]" /> 10-Day Doorstep Returns
             </div>
             <p className="text-[11px] leading-relaxed">
               If an item doesn't fit your routine, request a return anytime within 10 days for an easy pickup.
             </p>
-            <div className="flex items-center gap-2 text-white font-semibold pt-1">
+            <div className="flex items-center gap-2 text-stone-900 font-semibold pt-1">
               <ShieldCheck className="size-3.5 text-emerald-400" /> NABL Certified Supplements
             </div>
             <p className="text-[11px] leading-relaxed">
